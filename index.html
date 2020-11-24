@@ -15,15 +15,15 @@
             <div class="search-container">
 
                 <div class="searchbar">
-                    <input v-model="movie_searched" type="text" class="search-input" @keyup.enter="movieRequest()">
+                    <input v-model="title_searched" type="text" class="search-input" @keyup.enter="movieRequest(); tvshowsRequest();">
                     <div class="search-btn">
-                        <i class="fas fa-search" @click="movieRequest()"></i>
+                        <i class="fas fa-search" @click="movieRequest(); tvshowsRequest();"></i>
                     </div>
                 </div>
 
             </div>
 
-
+            <h1 v-if="movies.length > 0">Movies</h1>
             <div class="cards-container">
                 <div class="card" v-for="movie in movies">
                     <div class="italian-title">
@@ -46,6 +46,33 @@
                         <span>Voto: </span>
                         <i v-if="movie.vote_average > 0" class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
                         <span v-if="movie.vote_average == 0"><strong>N/A</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <h1 v-if="tvshows.length > 0">TV shows</h1>
+            <div class="cards-container">
+                <div class="card" v-for="show in tvshows">
+                    <div class="italian-title">
+                        <span>Titolo italiano: </span>
+                        <h3>{{show.name}}</h3>
+                    </div>
+                    <div class="original-title">
+                        <span>Titolo originale: </span>
+                        <h3>{{show.original_name}}</h3>
+                    </div>
+
+                    <!-- <p>{{movie.original_language}}</p> -->
+                    <div class="language-flag">
+                        <span>Lingua originale: </span>
+                        <span v-if="!known_languages.includes(show.original_language)">{{show.original_language}}</span>
+                        <img :src="getLanguageFlag(show)" alt="">
+                    </div>
+                    <!-- <p>{{movie.vote_average}}</p> -->
+                    <div class="vote">
+                        <span>Voto: </span>
+                        <i v-if="show.vote_average > 0" class="fa-star" :class="i <= show.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                        <span v-if="show.vote_average == 0"><strong>N/A</strong></span>
                     </div>
                 </div>
             </div>
