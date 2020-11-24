@@ -15,7 +15,7 @@
             <div class="search-container">
 
                 <div class="searchbar">
-                    <input v-model="movie_searched" type="text" class="search-input" name="" value="">
+                    <input v-model="movie_searched" type="text" class="search-input" @keyup.enter="movieRequest()">
                     <div class="search-btn">
                         <i class="fas fa-search" @click="movieRequest()"></i>
                     </div>
