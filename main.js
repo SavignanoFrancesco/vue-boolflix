@@ -68,7 +68,9 @@ var app = new Vue({
         },
         getLanguageFlag(title){
 
-            return 'bandiere/' + title.original_language + '.jpg';
+            if (this.known_languages.includes(title.original_language)) {
+                return 'bandiere/' + title.original_language + '.jpg';
+            }
 
         }
     },
