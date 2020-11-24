@@ -1,7 +1,8 @@
 var app = new Vue({
     el: '#root',
     data: {
-        movies: []
+        movies: [],
+        movie_searched: ''
     },
     methods: {
         movieRequest(){
@@ -11,7 +12,7 @@ var app = new Vue({
                     params:
                         {
                             api_key: '26a07cb4c3a1c1a713d00530e848c684',
-                            query: 'zombie',
+                            query: self.movie_searched,
                             language: 'it'
                         }
                     })
@@ -24,7 +25,7 @@ var app = new Vue({
     },
     mounted() {
 
-        this.movieRequest();
+
 
 
     }
