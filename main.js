@@ -8,6 +8,7 @@ var app = new Vue({
         movieRequest(){
             const self = this;
             if (self.movie_searched != '') {
+                //richiesta al server
                 axios
                     .get('https://api.themoviedb.org/3/search/movie', {
                         params:
@@ -19,7 +20,14 @@ var app = new Vue({
                         })
                     .then(function(risposta) {
 
+                        //metto la risposta dell'API in un array
                         self.movies = risposta.data.results;
+
+                        //trasformo i voti da base 10 a base 5
+                        self.movies.forEach((movie, i) => {
+                            movie.vote_average = Math.round(movie.vote_average / 2);
+                        });
+
                         console.log(self.movies);
                     });
             }else{
@@ -28,6 +36,7 @@ var app = new Vue({
         }
     },
     mounted() {
+
 
 
 
