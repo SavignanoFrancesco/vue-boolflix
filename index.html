@@ -38,8 +38,8 @@
                     <!-- <p>{{movie.original_language}}</p> -->
                     <div class="language-flag">
                         <span>Lingua originale: </span>
-                        <span v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span>
-                        <img :src="getLanguageFlag(movie)" alt="">
+                        <!-- <span v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span> -->
+                        <img :src="getLanguageFlag(movie)" :alt="movie.original_language">
                     </div>
                     <!-- <p>{{movie.vote_average}}</p> -->
                     <div class="vote">
@@ -65,8 +65,8 @@
                     <!-- <p>{{movie.original_language}}</p> -->
                     <div class="language-flag">
                         <span>Lingua originale: </span>
-                        <span v-if="!known_languages.includes(show.original_language)">{{show.original_language}}</span>
-                        <img :src="getLanguageFlag(show)" alt="">
+                        <!-- <span v-if="!known_languages.includes(show.original_language)">{{show.original_language}}</span> -->
+                        <img :src="getLanguageFlag(show)" :alt="show.original_language">
                     </div>
                     <!-- <p>{{movie.vote_average}}</p> -->
                     <div class="vote">

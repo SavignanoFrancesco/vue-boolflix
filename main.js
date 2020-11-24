@@ -5,7 +5,7 @@ var app = new Vue({
         title_searched: '',
         tvshows: [],
         max_vote: 5,
-        known_languages: ['en','it','fr','es','ja','de']
+        // known_languages: ['en','it','fr','es','ja','de']
     },
     methods: {
         movieRequest(){
@@ -68,9 +68,11 @@ var app = new Vue({
         },
         getLanguageFlag(title){
 
-            if (this.known_languages.includes(title.original_language)) {
-                return 'bandiere/' + title.original_language + '.jpg';
-            }
+            // if (this.known_languages.includes(title.original_language)) {
+            //     return 'bandiere/' + title.original_language + '.jpg';
+            // }
+
+            return 'bandiere/' + title.original_language + '.jpg';
 
         }
     },
