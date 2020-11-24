@@ -30,6 +30,9 @@
                     <h3>{{movie.original_title}}</h3>
                     <p>{{movie.original_language}}</p>
                     <p>{{movie.vote_average}}</p>
+                    <div class="vote">
+                        <i class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                    </div>
                 </div>
             </div>
 

@@ -2,7 +2,8 @@ var app = new Vue({
     el: '#root',
     data: {
         movies: [],
-        movie_searched: ''
+        movie_searched: '',
+        max_vote: 5
     },
     methods: {
         movieRequest(){
