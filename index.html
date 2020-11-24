@@ -38,7 +38,7 @@
                     <!-- <p>{{movie.original_language}}</p> -->
                     <div class="language-flag">
                         <span>Lingua originale: </span>
-                        <span>{{movie.original_language}}</span>
+                        <span v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span>
                         <img :src="getLanguageFlag(movie)" alt="">
                     </div>
                     <!-- <p>{{movie.vote_average}}</p> -->

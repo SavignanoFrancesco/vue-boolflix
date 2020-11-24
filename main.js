@@ -3,7 +3,8 @@ var app = new Vue({
     data: {
         movies: [],
         movie_searched: '',
-        max_vote: 5
+        max_vote: 5,
+        known_languages: ['en','it','fr','es','ja','de']
     },
     methods: {
         movieRequest(){
