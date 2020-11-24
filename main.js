@@ -5,7 +5,7 @@ var app = new Vue({
         title_searched: '',
         tvshows: [],
         max_vote: 5,
-        // known_languages: ['en','it','fr','es','ja','de']
+        known_languages: ['en','it','fr','es','ja','de']
     },
     methods: {
         movieRequest(){
