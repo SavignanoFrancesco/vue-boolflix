@@ -36,19 +36,9 @@ var app = new Vue({
             }
         },
         getLanguageFlag(movie){
-            if (movie.original_language == 'en') {
-                return 'bandiere/en.jpg';
-            }else if (movie.original_language == 'it') {
-                return 'bandiere/it.jpg';
-            }else if (movie.original_language == 'es') {
-                return 'bandiere/es.png';
-            }else if (movie.original_language == 'ja') {
-                return 'bandiere/ja.png';
-            }else if (movie.original_language == 'de') {
-                return 'bandiere/de.jpg';
-            }else if (movie.original_language == 'fr') {
-                return 'bandiere/fr.jpg';
-            }
+
+            return 'bandiere/' + movie.original_language + '.jpg';
+
         }
     },
     mounted() {
