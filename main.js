@@ -1,21 +1,31 @@
 var app = new Vue({
     el: '#root',
     data: {
-    
+        movies: []
     },
     methods: {
+        movieRequest(){
+            const self = this;
+            axios
+                .get('https://api.themoviedb.org/3/search/movie', {
+                    params:
+                        {
+                            api_key: '26a07cb4c3a1c1a713d00530e848c684',
+                            query: 'zombie',
+                            language: 'it'
+                        }
+                    })
+                .then(function(risposta) {
 
+                    self.movies = risposta.data.results;
+                    console.log(self.movies);
+                });
+        }
     },
     mounted() {
 
-        const self = this;
-        axios
-            .get('https://flynn.boolean.careers/exercises/api/array/music')
-            .then(function(risposta) {
+        this.movieRequest();
 
-                self.cds = risposta.data.response;
-
-            });
 
     }
 });

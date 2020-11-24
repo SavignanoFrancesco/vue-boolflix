@@ -12,6 +12,26 @@
 
         <div id="root">
 
+            <div class="search-container">
+
+                <div class="searchbar">
+                    <input type="text" class="search-input" name="" value="">
+                    <div class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="cards-container">
+                <div class="card" v-for="movie in movies">
+                    <h3>{{movie.title}}</h3>
+                    <h3>{{movie.original_title}}</h3>
+                    <p>{{movie.original_language}}</p>
+                    <p>{{movie.vote_average}}</p>
+                </div>
+            </div>
+
         </div>
 
         <script src="main.js" charset="utf-8"></script>

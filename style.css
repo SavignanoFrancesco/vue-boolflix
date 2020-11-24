@@ -3,3 +3,40 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.search-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchbar{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input{
+    height: 20px;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.search-btn{
+    font-size: 18px;
+    margin-left: 5px;
+    padding: 5px 10px;
+    background: red;
+    cursor: pointer;
+}
+
+.cards-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card{
+    border: 1px solid black;
+}
