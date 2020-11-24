@@ -44,7 +44,8 @@
                     <!-- <p>{{movie.vote_average}}</p> -->
                     <div class="vote">
                         <span>Voto: </span>
-                        <i class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                        <i v-if="movie.vote_average > 0" class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                        <span v-if="movie.vote_average == 0"><strong>N/A</strong></span>
                     </div>
                 </div>
             </div>
