@@ -32,11 +32,18 @@
 }
 
 .cards-container{
+    border: 1px solid black;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .card{
+    width: calc((100% - 40px) / 4);
     border: 1px solid black;
+    margin: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
