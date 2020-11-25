@@ -61,15 +61,15 @@ h2, h3{
 
 .cards-container{
     min-width: 100%;
+    margin-top: 5px;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 5px;
 }
 
 .card{
     width: calc((100% - 50px) / 5);
+    margin:0 5px 10px 5px;
     /* height: 350px; */
-    margin: 0px 5px 10px 5px;
     display: flex;
     border: 2px solid white;
 }

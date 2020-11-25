@@ -52,10 +52,10 @@ var app = new Vue({
                         //metto la risposta dell'API in un array
                         this.movies = risposta.data.results;
 
-                        //trasformo i voti da base 10 a base 5
-                        this.movies.forEach((movie, i) => {
-                            movie.vote_average = Math.round(movie.vote_average / 2);
-                        });
+                        // //trasformo i voti da base 10 a base 5
+                        // this.movies.forEach((movie, i) => {
+                        //     movie.vote_average = Math.round(movie.vote_average / 2);
+                        // });
 
                         //fine caricamento, la risposta è arrivata
                         this.loading_movies = false;
@@ -87,10 +87,10 @@ var app = new Vue({
                     //         //metto la risposta dell'API in un array
                     //         this.tvshows = risposta.data.results;
                     //
-                    //         //trasformo i voti da base 10 a base 5
-                    //         this.tvshows.forEach((show, i) => {
-                    //             show.vote_average = Math.round(show.vote_average / 2);
-                    //         });
+                    //      // //trasformo i voti da base 10 a base 5
+                    //      // this.tvshows.forEach((show, i) => {
+                    //      //     show.vote_average = Math.round(show.vote_average / 2);
+                    //      // });
                     //
                     //         //fine caricamento, la risposta è arrivata
                     //         this.loading_tvshows = false;

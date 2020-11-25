@@ -31,7 +31,7 @@
             <h3 v-if="loading_tvshows">Ricerca serie tv in corso...</h3>
 
             <div class="results" v-if="movies.length > 0">
-                <h3>Risultati per la ricerca: '{{title_search_support}}'</h3>
+                <h3>Risultati per la ricerca: '{{title_searched_support}}'</h3>
 
                 <h3 v-if="no_results_movies">Nessun film trovato...</h3>
                 <h3 v-if="no_results_tvshows">Nessuna serie tv trovata...</h3>
@@ -67,8 +67,8 @@
                         <!-- <p>{{movie.vote_average}}</p> -->
                         <div class="vote">
                             <span>Voto: </span>
-                            <i v-if="movie.vote_average > 0" class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span v-if="movie.vote_average == 0"><strong>N/A</strong></span>
+                            <i v-if="Math.round(movie.vote_average / 2) > 0" class="fa-star" :class="i <= Math.round(movie.vote_average / 2) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span v-if="Math.round(movie.vote_average / 2) == 0"><strong>N/A</strong></span>
                         </div>
                         <div class="overview">
                             <span>Trama: </span>
@@ -108,8 +108,8 @@
 
                         <div class="vote">
                             <span>Voto: </span>
-                            <i v-if="show.vote_average > 0" class="fa-star" :class="i <= show.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span v-if="show.vote_average == 0"><strong>N/A</strong></span>
+                            <i v-if="Math.round(show.vote_average / 2); > 0" class="fa-star" :class="i <= Math.round(show.vote_average / 2); ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span v-if="Math.round(show.vote_average / 2); == 0"><strong>N/A</strong></span>
                         </div>
                     </div>
                     </div>
