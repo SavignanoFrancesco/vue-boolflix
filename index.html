@@ -7,6 +7,8 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&family=Roboto+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
     </head>
     <body>
 
@@ -31,7 +33,7 @@
             <h3 v-if="loading_tvshows">Ricerca serie tv in corso...</h3>
 
             <div class="results" v-if="movies.length > 0">
-                <h3>Risultati per la ricerca: '{{title_searched_support}}'</h3>
+                <h3>Risultati della la ricerca: '{{title_searched_support}}'</h3>
 
                 <h3 v-if="no_results_movies">Nessun film trovato...</h3>
                 <h3 v-if="no_results_tvshows">Nessuna serie tv trovata...</h3>
@@ -50,30 +52,30 @@
 
                     <div class="card-info">
                         <div class="italian-title">
-                            <span>Titolo italiano: </span>
-                            <h4>{{movie.title}}</h4>
+                            <span class="span1">Titolo italiano: </span>
+                            <span class="span2">{{movie.title}}</span>
                         </div>
                         <div class="original-title">
-                            <span>Titolo originale: </span>
-                            <h4>{{movie.original_title}}</h4>
+                            <span class="span1">Titolo originale: </span>
+                            <span class="span2">{{movie.original_title}}</span>
                         </div>
 
                         <!-- <p>{{movie.original_language}}</p> -->
                         <div class="language-flag">
-                            <span>Lingua originale: </span>
-                            <span v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span>
+                            <span class="span1">Lingua originale: </span>
+                            <span class="span2" v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span>
                             <img v-else :src="getLanguageFlag(movie)" :alt="movie.original_language">
                         </div>
                         <!-- <p>{{movie.vote_average}}</p> -->
                         <div class="vote">
-                            <span>Voto: </span>
+                            <span class="span1">Voto: </span>
                             <i v-if="Math.round(movie.vote_average / 2) > 0" class="fa-star" :class="i <= Math.round(movie.vote_average / 2) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span v-if="Math.round(movie.vote_average / 2) == 0"><strong>N/A</strong></span>
+                            <span class="span2" v-if="Math.round(movie.vote_average / 2) == 0"><strong>N/A</strong></span>
                         </div>
                         <div class="overview">
-                            <span>Trama: </span>
-                            <span v-if="movie.overview != ''">{{movie.overview}}</span>
-                            <span v-else>Non disponibile</span>
+                            <span class="span1">Trama: </span>
+                            <span class="span2" v-if="movie.overview != ''">{{movie.overview}}</span>
+                            <span class="span2" v-else>Non disponibile</span>
                         </div>
                     </div>
 
