@@ -70,12 +70,17 @@
                             <i v-if="movie.vote_average > 0" class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
                             <span v-if="movie.vote_average == 0"><strong>N/A</strong></span>
                         </div>
+                        <div class="overview">
+                            <span>Trama: </span>
+                            <span v-if="movie.overview != ''">{{movie.overview}}</span>
+                            <span v-else>Non disponibile</span>
+                        </div>
                     </div>
 
                 </div>
             </div>
 
-            <h2 v-if="tvshows.length > 0">Serie TV</h2>
+            <!-- <h2 v-if="tvshows.length > 0">Serie TV</h2>
             <div class="cards-container">
                 <div class="card" v-for="show in tvshows">
 
@@ -108,7 +113,7 @@
                         </div>
                     </div>
                     </div>
-            </div>
+            </div> -->
 
 
         </div>
