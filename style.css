@@ -67,30 +67,43 @@ h2, h3{
 }
 
 .card{
-    width: 185px;
+    width: calc((100% - 50px) / 5);
+    /* height: 350px; */
     margin: 0px 5px 10px 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
 }
 
-.card:hover .card-cover img{
+.card:hover .card-cover{
     display: none;
 }
-.card:hover .card-info{
-    display: block;
-}
 
-.card-cover img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.card:hover .card-info{
+    display: inline-block;
 }
 
 .card-info{
     width: 100%;
     height: 100%;
     border: 1px solid black;
+}
+
+.card-cover{
+    width: 100%;
+    height: 100%;
+}
+
+.card-cover img{
+    width: 100%;
+    height: 100%;
+}
+
+.card-info{
+    width: 100%;
+    min-height: 100%;
+
     display: none;
 }
 

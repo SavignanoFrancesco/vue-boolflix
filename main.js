@@ -14,7 +14,7 @@ var app = new Vue({
         no_results_movies: false,
         no_results_tvshows: false,
         cover_starting_url: 'https://image.tmdb.org/t/p/',
-        cover_size: 'w185',
+        cover_size: 'w300',
 
 
     },
@@ -63,40 +63,40 @@ var app = new Vue({
                         console.log(this.movies);
                     });
 
-                    // //inizio caricamento
-                    // this.loading_tvshows = true;
-                    // //richiesta al server
-                    // axios
-                    //     .get('https://api.themoviedb.org/3/search/tv', {
-                    //         params:
-                    //             {
-                    //                 api_key: this.api_key,
-                    //                 query: this.title_searched,
-                    //                 language: 'it'
-                    //             }
-                    //         })
-                    //     .then((risposta) => {
-                    //
-                    //         //metto la risposta dell'API in un array
-                    //         this.tvshows = risposta.data.results;
-                    //
-                    //         //trasformo i voti da base 10 a base 5
-                    //         this.tvshows.forEach((show, i) => {
-                    //             show.vote_average = Math.round(show.vote_average / 2);
-                    //         });
-                    //
-                    //         //fine caricamento, la risposta è arrivata
-                    //         this.loading_tvshows = false;
-                    //
-                    //         //se non ci sono risultati nella risposta
-                    //         if (this.tvshows.length == 0) {
-                    //             this.no_results_tvshows = true;
-                    //         }else{
-                    //             this.no_results_tvshows = false;
-                    //         }
-                    //
-                    //         console.log(this.tvshows);
-                    //     });
+                    //inizio caricamento
+                    this.loading_tvshows = true;
+                    //richiesta al server
+                    axios
+                        .get('https://api.themoviedb.org/3/search/tv', {
+                            params:
+                                {
+                                    api_key: this.api_key,
+                                    query: this.title_searched,
+                                    language: 'it'
+                                }
+                            })
+                        .then((risposta) => {
+
+                            //metto la risposta dell'API in un array
+                            this.tvshows = risposta.data.results;
+
+                            //trasformo i voti da base 10 a base 5
+                            this.tvshows.forEach((show, i) => {
+                                show.vote_average = Math.round(show.vote_average / 2);
+                            });
+
+                            //fine caricamento, la risposta è arrivata
+                            this.loading_tvshows = false;
+
+                            //se non ci sono risultati nella risposta
+                            if (this.tvshows.length == 0) {
+                                this.no_results_tvshows = true;
+                            }else{
+                                this.no_results_tvshows = false;
+                            }
+
+                            console.log(this.tvshows);
+                        });
             }else{
                 alert('Devi inserire qualcosa nell\'input!!');
             }
