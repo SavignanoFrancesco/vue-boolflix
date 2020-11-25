@@ -42,31 +42,40 @@
             <h2 v-if="movies.length > 0">Movies</h2>
             <div class="cards-container">
                 <div class="card" v-for="movie in movies">
-                    <div class="italian-title">
-                        <span>Titolo italiano: </span>
-                        <h4>{{movie.title}}</h4>
-                    </div>
-                    <div class="original-title">
-                        <span>Titolo originale: </span>
-                        <h4>{{movie.original_title}}</h4>
+
+                    <div class="card-cover">
+                        <img :src="cover_starting_url + cover_size + movie.poster_path" alt="" v-if="movie.poster_path != null">
+                        <img src="no_cover/no_cover.jpg" alt="" v-else>
                     </div>
 
-                    <!-- <p>{{movie.original_language}}</p> -->
-                    <div class="language-flag">
-                        <span>Lingua originale: </span>
-                        <span v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span>
-                        <img v-else :src="getLanguageFlag(movie)" :alt="movie.original_language">
+                    <div class="card-info">
+                        <div class="italian-title">
+                            <span>Titolo italiano: </span>
+                            <h4>{{movie.title}}</h4>
+                        </div>
+                        <div class="original-title">
+                            <span>Titolo originale: </span>
+                            <h4>{{movie.original_title}}</h4>
+                        </div>
+
+                        <!-- <p>{{movie.original_language}}</p> -->
+                        <div class="language-flag">
+                            <span>Lingua originale: </span>
+                            <span v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span>
+                            <img v-else :src="getLanguageFlag(movie)" :alt="movie.original_language">
+                        </div>
+                        <!-- <p>{{movie.vote_average}}</p> -->
+                        <div class="vote">
+                            <span>Voto: </span>
+                            <i v-if="movie.vote_average > 0" class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span v-if="movie.vote_average == 0"><strong>N/A</strong></span>
+                        </div>
                     </div>
-                    <!-- <p>{{movie.vote_average}}</p> -->
-                    <div class="vote">
-                        <span>Voto: </span>
-                        <i v-if="movie.vote_average > 0" class="fa-star" :class="i <= movie.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                        <span v-if="movie.vote_average == 0"><strong>N/A</strong></span>
-                    </div>
+
                 </div>
             </div>
 
-            <h2 v-if="tvshows.length > 0">Serie TV</h2>
+            <!-- <h2 v-if="tvshows.length > 0">Serie TV</h2>
             <div class="cards-container">
                 <div class="card" v-for="show in tvshows">
                     <div class="italian-title">
@@ -78,20 +87,20 @@
                         <h4>{{show.original_name}}</h4>
                     </div>
 
-                    <!-- <p>{{movie.original_language}}</p> -->
+
                     <div class="language-flag">
                         <span>Lingua originale: </span>
                         <span v-if="!known_languages.includes(show.original_language)">{{show.original_language}}</span>
                         <img v-else :src="getLanguageFlag(show)" :alt="show.original_language">
                     </div>
-                    <!-- <p>{{movie.vote_average}}</p> -->
+
                     <div class="vote">
                         <span>Voto: </span>
                         <i v-if="show.vote_average > 0" class="fa-star" :class="i <= show.vote_average ? 'fas' : 'far'" v-for="i in max_vote"></i>
                         <span v-if="show.vote_average == 0"><strong>N/A</strong></span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
         </div>
