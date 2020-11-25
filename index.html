@@ -19,24 +19,36 @@
                 </div>
 
                 <div class="searchbar">
-                    <input v-model="title_searched" type="text" class="search-input" @keyup.enter="movieRequest(); tvshowsRequest();">
+                    <input v-model="title_searched" type="text" class="search-input" @keyup.enter="titleRequest()">
                     <div class="search-btn">
-                        <span class="" @click="movieRequest(); tvshowsRequest();">Cerca</span>
+                        <span class="" @click="movieRequest()">Cerca</span>
                     </div>
                 </div>
 
             </header>
 
-            <h1 v-if="movies.length > 0">Movies</h1>
+            <h3 v-if="loading_movies">Ricerca film in corso...</h3>
+            <h3 v-if="loading_tvshows">Ricerca serie tv in corso...</h3>
+
+            <div class="results" v-if="movies.length > 0">
+                <h3>Risultati per la ricerca: '{{title_search_support}}'</h3>
+
+                <h3 v-if="no_results_movies">Nessun film trovato...</h3>
+                <h3 v-if="no_results_tvshows">Nessuna serie tv trovata...</h3>
+            </div>
+
+
+
+            <h2 v-if="movies.length > 0">Movies</h2>
             <div class="cards-container">
                 <div class="card" v-for="movie in movies">
                     <div class="italian-title">
                         <span>Titolo italiano: </span>
-                        <h3>{{movie.title}}</h3>
+                        <h4>{{movie.title}}</h4>
                     </div>
                     <div class="original-title">
                         <span>Titolo originale: </span>
-                        <h3>{{movie.original_title}}</h3>
+                        <h4>{{movie.original_title}}</h4>
                     </div>
 
                     <!-- <p>{{movie.original_language}}</p> -->
@@ -54,16 +66,16 @@
                 </div>
             </div>
 
-            <h1 v-if="tvshows.length > 0">TV shows</h1>
+            <h2 v-if="tvshows.length > 0">Serie TV</h2>
             <div class="cards-container">
                 <div class="card" v-for="show in tvshows">
                     <div class="italian-title">
                         <span>Titolo italiano: </span>
-                        <h3>{{show.name}}</h3>
+                        <h4>{{show.name}}</h4>
                     </div>
                     <div class="original-title">
                         <span>Titolo originale: </span>
-                        <h3>{{show.original_name}}</h3>
+                        <h4>{{show.original_name}}</h4>
                     </div>
 
                     <!-- <p>{{movie.original_language}}</p> -->

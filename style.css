@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+h2, h3{
+    margin-top: 10px;
+    color: whitesmoke;
+}
+
 .container{
     background: #404040;
     min-height: 100vh;
@@ -58,13 +63,13 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .card{
-    width: calc((100% - 40px) / 4);
+    width: calc((100% - 55px) / 5);
     border: 1px solid black;
-    margin: 10px 5px;
+    margin: 0px 5px 10px 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
