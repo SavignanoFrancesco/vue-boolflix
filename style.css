@@ -4,14 +4,28 @@
     box-sizing: border-box;
 }
 
-.search-container{
+.container{
+    background: #404040;
+    min-height: 100vh;
+}
+
+.header{
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+}
+
+.logo{
+    margin-left: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: red;
 }
 
 .searchbar{
-    margin-top: 20px;
+    margin: 20px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,20 +33,28 @@
 
 .search-input{
     height: 20px;
+    width: 250px;
     font-size: 18px;
     margin-right: 5px;
+    padding: 10px 0px;
 }
 
 .search-btn{
     font-size: 18px;
+    font-weight: bold;
+    color: white;
     margin-left: 5px;
     padding: 5px 10px;
     background: red;
     cursor: pointer;
 }
 
+.search-btn:hover{
+    background: rgba(255,0,0,0.8);
+    color: rgba(255,255,255,0.8);
+}
+
 .cards-container{
-    /* border: 1px solid black; */
     width: 100%;
     display: flex;
     flex-wrap: wrap;

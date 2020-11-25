@@ -10,18 +10,22 @@
     </head>
     <body>
 
-        <div id="root">
+        <div class="container" id="root">
 
-            <div class="search-container">
+            <header class="header">
+
+                <div class="logo">
+                    <h1>Boolflix</h1>
+                </div>
 
                 <div class="searchbar">
                     <input v-model="title_searched" type="text" class="search-input" @keyup.enter="movieRequest(); tvshowsRequest();">
                     <div class="search-btn">
-                        <i class="fas fa-search" @click="movieRequest(); tvshowsRequest();"></i>
+                        <span class="" @click="movieRequest(); tvshowsRequest();">Cerca</span>
                     </div>
                 </div>
 
-            </div>
+            </header>
 
             <h1 v-if="movies.length > 0">Movies</h1>
             <div class="cards-container">
