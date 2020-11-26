@@ -29,11 +29,6 @@ h2{
     min-height: 100vh;
     font-family: 'Raleway', sans-serif;
 }
-.container::after{
-    content: '';
-    display: table;
-    clear: both;
-}
 
 .header{
     width: 100%;
@@ -137,30 +132,23 @@ h2{
 }
 
 .cards-container{
-    max-width: 100%;
-    float: left;
+    min-width: 100%;
     /* margin-top: 5px; */
-    /* display: flex;
-    flex-wrap: wrap; */
+    display: flex;
+    flex-wrap: wrap;
 }
-.cards-container::after{
-    content: '';
-    display: table;
-    clear: both;
-}
-.cards-container.movie.hidden{
+.card.movie.hidden{
     display: none;
 }
-.cards-container.tvshows.hidden{
+.card.tvshows.hidden{
     display: none;
 }
 
 .card{
     height: 58vh;
-    width: calc((100vw - 50px) / 5);
+    width: calc((100% - 50px) / 5);
     margin:0 5px 10px 5px;
     /* height: 350px; */
-    float:left;
     display: flex;
     border: 2px solid white;
 }
@@ -232,9 +220,6 @@ h2{
     display: none;
 }
 
-.float-left{
-    float: left;
-}
 
 ::-webkit-scrollbar {
     width: 0px;

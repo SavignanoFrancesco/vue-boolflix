@@ -55,8 +55,8 @@
             <div class="results" v-if="title_searched_support.length > 0">
                 <h3>Risultati della ricerca: '{{title_searched_support}}'</h3>
 
-                <h3 v-if="no_results_movies && !tvshows_active && !allcategories_active">Nessun film trovato...</h3>
-                <h3 v-if="no_results_tvshows && !movies_active && !allcategories_active">Nessuna serie tv trovata...</h3>
+                <h3 v-if="no_results_movies && !tvshows_active">Nessun film trovato...</h3>
+                <h3 v-if="no_results_tvshows && !movies_active">Nessuna serie tv trovata...</h3>
             </div>
 
 
@@ -67,15 +67,17 @@
 
 
             <h2 class="category-title" v-if="((movies.length > 0 || tvshows.length) && allcategories_active)">Tutte le categorie</h2>
+            <h2 class="category-title" v-if="movies.length > 0 && movies_active">Film</h2>
+            <h2 v-if="tvshows.length > 0 && tvshows_active">Serie TV</h2>
 
-            <!-- __________________SEZIONE_DEDICATA_AI_FILM__________________ -->
-            <h2 v-if="movies.length > 0 && movies_active">Film</h2>
+
 
             <!-- __________________CONTENITORE_CARDS__________________ -->
-            <div class="cards-container movie" :class="!movies_active && !allcategories_active ? 'hidden' : ''">
+            <div class="cards-container" >
 
+                <!-- __________________SEZIONE_DEDICATA_AI_FILM__________________ -->
                 <!-- __________________CARD__________________ -->
-                <div class="card" v-for="(movie,index) in movies">
+                <div class="card  movie" :class="!movies_active && !allcategories_active ? 'hidden' : ''" v-for="(movie,index) in movies">
 
                     <!-- __________________COVER__________________ -->
                     <div class="card-cover">
@@ -170,15 +172,10 @@
                     </div>
 
                 </div>
-
-            </div>
-            <!-- __________________FINE_CONTENITORE_CARDS__________________ -->
             <!-- __________________FINE_SEZIONE_DEDICATA_AI_FILM__________________ -->
 
             <!-- __________________SEZIONE_DEDICATA_ALLE_SERIE_TV__________________ -->
-            <h2 v-if="tvshows.length > 0 && tvshows_active">Serie TV</h2>
-            <div class="cards-container tvshows" :class="!tvshows_active && !allcategories_active ? 'hidden' : ''">
-                <div class="card" v-for="(show, index) in tvshows" vi-if="tvshows_active">
+                <div class="card tvshows" :class="!tvshows_active && !allcategories_active ? 'hidden' : ''" v-for="(show, index) in tvshows" vi-if="tvshows_active">
 
                     <div class="card-cover">
                         <img :src="cover_starting_url + cover_size + show.poster_path" alt="" v-if="show.poster_path != null">
@@ -269,9 +266,10 @@
                     </div>
 
                 </div>
+                <!-- ________________FINE_SEZIONE_DEDICATA_ALLE_SERIE_TV_______________ -->
 
             </div>
-
+            <!-- __________________FINE_CONTENITORE_CARTE__________________ -->
 
         </div>
 
