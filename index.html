@@ -40,6 +40,13 @@
             </div>
 
 
+                <div v-if="first_page_load" class="starting-page">
+                    <h1 class="logo">Boolflix</h1>
+                    <h2>Cerca film e/o serie tv!</h2>
+                </div>
+
+
+
             <!-- __________________SEZIONE_DEDICATA_AI_FILM__________________ -->
             <h2 v-if="movies.length > 0">Movies</h2>
 

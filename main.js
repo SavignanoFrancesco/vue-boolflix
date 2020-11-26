@@ -1,6 +1,7 @@
 var app = new Vue({
     el: '#root',
     data: {
+        first_page_load: true,
         api_key: '26a07cb4c3a1c1a713d00530e848c684',
         language: 'it',
         title_searched: '',
@@ -26,6 +27,8 @@ var app = new Vue({
     methods: {
         titleRequest(){
 
+            // l'utente ha fatto la prima interazione
+            this.first_page_load = false;
             //ad ogni richiesta di ricerca reimposta gli array a vuoti
             this.movies = [];
             this.tvshows = [];
