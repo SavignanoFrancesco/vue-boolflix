@@ -20,6 +20,10 @@ var app = new Vue({
             clicked_flag: false,
             info_index: 0,
         },
+        hidden_info_shows: {
+            clicked_flag: false,
+            info_index: 0,
+        },
         current_actors: [],
         loading_actors: false,
 
@@ -143,6 +147,36 @@ var app = new Vue({
                 });
 
         },
+        getActorsShow(show_id){
+            this.current_actors = [];
+            this.loading_actors = true;
+            //richiesta al server(movie_actors)
+            axios
+                .get('https://api.themoviedb.org/3/tv/' + show_id + '/credits?api_key=26a07cb4c3a1c1a713d00530e848c684', {
+                    params:
+                        {
+                            api_key: this.api_key,
+                            show_id: show_id,
+                        }
+                    })
+                .then((risposta) => {
+
+                    //controllo quantità membri del cast
+                    if (risposta.data.cast.length > 5) {
+                        for (var i = 0; i < 5; i++) {
+                            this.current_actors.push(risposta.data.cast[i].name);
+                        }
+                    }else{
+                        for (var i = 0; i < risposta.data.cast.length; i++) {
+                            this.current_actors.push(risposta.data.cast[i].name);
+                        }
+                    }
+
+
+                    this.loading_actors = false;
+                });
+
+        },
         getVote(title){
             //voto da base 10 a base 5
             return Math.round(title.vote_average / 2);
@@ -162,6 +196,17 @@ var app = new Vue({
                 this.hidden_info.clicked_flag = false;
             }else{
                 this.hidden_info.clicked_flag = true;
+            }
+        },
+        showMoreInfoShows(index){
+            //prelevo l'index della carta cliccata
+            this.hidden_info_shows.info_index = index;
+
+            //toggle per apreire e chiudere hidden-info
+            if (this.hidden_info_shows.clicked_flag) {
+                this.hidden_info_shows.clicked_flag = false;
+            }else{
+                this.hidden_info_shows.clicked_flag = true;
             }
         },
     },
