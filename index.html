@@ -214,30 +214,30 @@
 
                     <div class="italian-title">
                         <span class="span1">Titolo italiano: </span>
-                        <span class="span2">{{tvshows[hidden_info.info_index].name}}</span>
+                        <span class="span2">{{tvshows[hidden_info_shows.info_index].name}}</span>
                     </div>
 
                     <div class="original-title">
                         <span class="span1">Titolo originale: </span>
-                        <span class="span2">{{tvshows[hidden_info.info_index].original_name}}</span>
+                        <span class="span2">{{tvshows[hidden_info_shows.info_index].original_name}}</span>
                     </div>
 
                     <div class="language-flag">
                         <span class="span1">Lingua originale: </span>
-                        <span class="span2" v-if="!known_languages.includes(tvshows[hidden_info.info_index].original_language)">{{tvshows[hidden_info.info_index].original_language}}</span>
-                        <img v-else :src="getLanguageFlag(tvshows[hidden_info.info_index])" :alt="tvshows[hidden_info.info_index].original_language">
+                        <span class="span2" v-if="!known_languages.includes(tvshows[hidden_info_shows.info_index].original_language)">{{tvshows[hidden_info_shows.info_index].original_language}}</span>
+                        <img v-else :src="getLanguageFlag(tvshows[hidden_info_shows.info_index])" :alt="tvshows[hidden_info_shows.info_index].original_language">
                     </div>
 
                     <div class="vote">
                         <span class="span1">Voto: </span>
-                            <i v-if="getVote(tvshows[hidden_info.info_index]) > 0" class="fa-star" :class="i <= getVote(tvshows[hidden_info.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                        <span class="span2" v-if="getVote(tvshows[hidden_info.info_index]) == 0"><strong>N/A</strong></span>
+                            <i v-if="getVote(tvshows[hidden_info_shows.info_index]) > 0" class="fa-star" :class="i <= getVote(tvshows[hidden_info_shows.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                        <span class="span2" v-if="getVote(tvshows[hidden_info_shows.info_index]) == 0"><strong>N/A</strong></span>
                     </div>
 
                     <div class="overview">
                         <span class="span1">Trama: </span>
-                        <span class="span2" v-if="tvshows[hidden_info.info_index].overview == ''">Non disponibile</span>
-                        <span class="span2" v-else>{{tvshows[hidden_info.info_index].overview}}</span>
+                        <span class="span2" v-if="tvshows[hidden_info_shows.info_index].overview == ''">Non disponibile</span>
+                        <span class="span2" v-else>{{tvshows[hidden_info_shows.info_index].overview}}</span>
                     </div>
 
                     <div class="cast">
