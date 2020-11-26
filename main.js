@@ -15,7 +15,10 @@ var app = new Vue({
         no_results_tvshows: false,
         cover_starting_url: 'https://image.tmdb.org/t/p/',
         cover_size: 'w300',
-
+        hidden_info: {
+            clicked_flag: false,
+            info_index: 0,
+        },
 
     },
     methods: {
@@ -112,7 +115,16 @@ var app = new Vue({
 
             return 'bandiere/' + title.original_language + '.jpg';
 
-        }
+        },
+        showMoreInfo(index){
+            this.hidden_info.info_index = index;
+            console.log(this.hidden_info.info_index);
+            if (this.hidden_info.clicked_flag) {
+                this.hidden_info.clicked_flag = false;
+            }else{
+                this.hidden_info.clicked_flag = true;
+            }
+        },
     },
     mounted() {
 

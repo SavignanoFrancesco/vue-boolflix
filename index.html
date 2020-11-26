@@ -43,13 +43,15 @@
 
             <h2 v-if="movies.length > 0">Movies</h2>
             <div class="cards-container">
-                <div class="card" v-for="movie in movies">
+                <div class="card" v-for="(movie,index) in movies">
 
+                    <!-- __________________COVER__________________ -->
                     <div class="card-cover">
                         <img :src="cover_starting_url + cover_size + movie.poster_path" alt="" v-if="movie.poster_path != null">
                         <img src="no_cover/no_cover.jpg" alt="" v-else>
                     </div>
 
+                    <!-- __________________SHOWED_INFO__________________ -->
                     <div class="card-info">
                         <div class="italian-title">
                             <span class="span1">Titolo italiano: </span>
@@ -60,13 +62,12 @@
                             <span class="span2">{{movie.original_title}}</span>
                         </div>
 
-                        <!-- <p>{{movie.original_language}}</p> -->
                         <div class="language-flag">
                             <span class="span1">Lingua originale: </span>
                             <span class="span2" v-if="!known_languages.includes(movie.original_language)">{{movie.original_language}}</span>
                             <img v-else :src="getLanguageFlag(movie)" :alt="movie.original_language">
                         </div>
-                        <!-- <p>{{movie.vote_average}}</p> -->
+
                         <div class="vote">
                             <span class="span1">Voto: </span>
                             <i v-if="Math.round(movie.vote_average / 2) > 0" class="fa-star" :class="i <= Math.round(movie.vote_average / 2) ? 'fas' : 'far'" v-for="i in max_vote"></i>
@@ -74,10 +75,28 @@
                         </div>
                         <div class="overview">
                             <span class="span1">Trama: </span>
-                            <span class="span2" v-if="movie.overview != ''">{{movie.overview}}</span>
-                            <span class="span2" v-else>Non disponibile</span>
+                            <span v-if="movie.overview.length > 100">{{movie.overview.slice(0, 99)}}[...]</span>
+                            <span v-if="movie.overview.length <= 100" class="span2">{{movie.overview}}</span>
+                            <span class="span2" v-if="movie.overview == ''">Non disponibile</span>
                         </div>
+                        <div class="info-btn" @click="showMoreInfo(index)">
+                            <span>Visualizzza più informazioni</span>
+                        </div>
+
                     </div>
+
+                    <!-- __________________HDDEN_ INFO__________________ -->
+                    <div class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
+                        <div class="quit-info">
+                            <i @click="showMoreInfo(index)" class="fas fa-undo-alt"></i>
+                        </div>
+                        <span>Trama: </span>
+                        <span v-if="movies[hidden_info.info_index].overview == ''">Non disponibile</span>
+                        <span v-else>{{movies[hidden_info.info_index].overview}}</span>
+
+                    </div>
+
+
 
                 </div>
             </div>
