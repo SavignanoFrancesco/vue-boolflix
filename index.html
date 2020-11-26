@@ -71,8 +71,8 @@
 
                         <div class="vote">
                             <span class="span1">Voto: </span>
-                            <i v-if="Math.round(movie.vote_average / 2) > 0" class="fa-star" :class="i <= Math.round(movie.vote_average / 2) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span class="span2" v-if="Math.round(movie.vote_average / 2) == 0"><strong>N/A</strong></span>
+                            <i v-if="getVote(movie)" class="fa-star" :class="i <= getVote(movie) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span class="span2" v-if="getVote(movie) == 0"><strong>N/A</strong></span>
                         </div>
                         <div class="overview">
                             <span class="span1">Trama: </span>
@@ -110,8 +110,8 @@
 
                         <div class="vote">
                             <span class="span1">Voto: </span>
-                                <i v-if="Math.round(movies[hidden_info.info_index].vote_average / 2) > 0" class="fa-star" :class="i <= Math.round(movies[hidden_info.info_index].vote_average / 2) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span class="span2" v-if="Math.round(movies[hidden_info.info_index].vote_average / 2) == 0"><strong>N/A</strong></span>
+                                <i v-if="getVote(movies[hidden_info.info_index]) > 0" class="fa-star" :class="i <= getVote(movies[hidden_info.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span class="span2" v-if="getVote(movies[hidden_info.info_index]) == 0"><strong>N/A</strong></span>
                         </div>
 
                         <div class="overview">

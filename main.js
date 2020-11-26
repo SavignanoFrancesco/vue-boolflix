@@ -111,6 +111,11 @@ var app = new Vue({
                 alert('Devi inserire qualcosa nell\'input!!');
             }
         },
+        getVote(title){
+
+            return Math.round(title.vote_average / 2);
+
+        },
         getLanguageFlag(title){
 
             return 'bandiere/' + title.original_language + '.jpg';
