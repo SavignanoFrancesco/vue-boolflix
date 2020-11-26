@@ -72,7 +72,8 @@ var app = new Vue({
                             this.no_results_movies = false;
                         }
 
-                        console.log(this.movies);
+                        console.log(this.no_results_movies);
+                        console.log('QUA!',this.movies);
                     });
 
                     // //inizio caricamento

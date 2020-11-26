@@ -32,7 +32,7 @@
             <h3 v-if="loading_movies">Ricerca film in corso...</h3>
             <h3 v-if="loading_tvshows">Ricerca serie tv in corso...</h3>
 
-            <div class="results" v-if="movies.length > 0">
+            <div class="results" v-if="title_searched_support.length > 0">
                 <h3>Risultati della la ricerca: '{{title_searched_support}}'</h3>
 
                 <h3 v-if="no_results_movies">Nessun film trovato...</h3>
