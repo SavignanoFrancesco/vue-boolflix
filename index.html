@@ -21,13 +21,13 @@
                         <h1>Boolflix</h1>
                     </div>
                     <div class="header-btn all" @click="showAll()">
-                        <h2>All Categories</h2>
+                        <h2>Tutte le categorie</h2>
                         <div class="red-bar" :class="allcategories_active ? 'active' : ''">
 
                         </div>
                     </div>
                     <div class="header-btn movie" @click="showMovies()">
-                        <h2>Movies</h2>
+                        <h2>Film</h2>
                         <div class="red-bar" :class="movies_active ? 'active' : ''">
 
                         </div>
@@ -66,9 +66,10 @@
                 </div>
 
 
+            <h2 class="category-title" v-if="((movies.length > 0 || tvshows.length) && allcategories_active)">Tutte le categorie</h2>
 
             <!-- __________________SEZIONE_DEDICATA_AI_FILM__________________ -->
-            <h2 v-if="movies.length > 0 && (movies_active || allcategories_active)">Movies</h2>
+            <h2 v-if="movies.length > 0 && movies_active">Film</h2>
 
             <!-- __________________CONTENITORE_CARDS__________________ -->
             <div class="cards-container movie" :class="!movies_active && !allcategories_active ? 'hidden' : ''">
@@ -112,8 +113,8 @@
                             <span v-if="movie.overview.length <= 100" class="span2">{{movie.overview}}</span>
                             <span class="span2" v-if="movie.overview == ''">Non disponibile</span>
                         </div>
-                        <div class="info-btn" @click="showMoreInfo(index);getActors(movie.id);">
-                            <span>Visualizzza più informazioni</span>
+                        <div class="info-btn">
+                            <span @click="showMoreInfo(index);getActors(movie.id);">Visualizzza più informazioni</span>
                         </div>
 
                     </div>
@@ -175,7 +176,7 @@
             <!-- __________________FINE_SEZIONE_DEDICATA_AI_FILM__________________ -->
 
             <!-- __________________SEZIONE_DEDICATA_ALLE_SERIE_TV__________________ -->
-            <h2 v-if="tvshows.length > 0 && (tvshows_active || allcategories_active)">Serie TV</h2>
+            <h2 v-if="tvshows.length > 0 && tvshows_active">Serie TV</h2>
             <div class="cards-container tvshows" :class="!tvshows_active && !allcategories_active ? 'hidden' : ''">
                 <div class="card" v-for="(show, index) in tvshows" vi-if="tvshows_active">
 
@@ -214,8 +215,8 @@
                             <span class="span2" v-if="show.overview == ''">Non disponibile</span>
                         </div>
                         <!--  -->
-                        <div class="info-btn" @click="showMoreInfoShows(index);getActorsShow(show.id);">
-                            <span>Visualizzza più informazioni</span>
+                        <div class="info-btn" >
+                            <span @click="showMoreInfoShows(index);getActorsShow(show.id);">Visualizzza più informazioni</span>
                         </div>
                     </div>
                 </div>

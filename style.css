@@ -36,7 +36,7 @@ h2{
     justify-content: space-between;
     align-items: center;
     background: black;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .header-left{
@@ -49,20 +49,21 @@ h2{
     align-items: baseline;
     margin-left: 30px;
     position: relative;
-    z-index: 3;
+    /* z-index: 3; */
 }
 
 .red-bar{
     width: 40px;
-    height: 80px;
+    height: 5px;
     background: #b30000;
     position: absolute;
     transform: translate(-50%, -100%);
     left: 52%;
-    top: 141%;
-    border-bottom-left-radius: 1px;
-    border-bottom-right-radius: 1px;
-    z-index: -1;
+    top: 145%;
+    border-radius: 2px;
+    /* border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px; */
+    /* z-index: -1; */
     display: none;
 }
 .red-bar.active{
@@ -126,9 +127,13 @@ h2{
     font-size: 80px;
 }
 
+.category-title{
+    margin-bottom: 5px;
+}
+
 .cards-container{
     min-width: 100%;
-    margin-top: 5px;
+    /* margin-top: 5px; */
     display: flex;
     flex-wrap: wrap;
 }
@@ -190,12 +195,12 @@ h2{
 }
 
 .info-btn{
-    cursor: pointer;
     color: red;
 }
 
-.info-btn:hover{
+.info-btn span:hover{
     color: rgba(255,0,0,0.8);
+    cursor: pointer;
 }
 
 
@@ -211,7 +216,7 @@ h2{
     background: black;
     border: 2px solid white;
     overflow-y: scroll;
-    z-index: 10;
+    /* z-index: 10; */
     display: none;
 }
 
@@ -231,8 +236,9 @@ h2{
     margin-bottom: 5px;
 }
 
-.quit-info:hover{
+.quit-info i:hover{
     color: rgba(255,0,0,0.8);
+    cursor: pointer;
 }
 
 .hidden-info .italian-title{
@@ -246,10 +252,6 @@ h2{
 .hidden-info.active{
     display: flex;
     flex-direction: column;
-}
-
-.quit-info{
-    cursor: pointer;
 }
 
 .hidden-cover{
