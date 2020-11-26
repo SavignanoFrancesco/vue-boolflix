@@ -123,7 +123,8 @@
                         <div class="cast">
                             <span class="span1">Nel cast: </span>
                             <span v-if="current_actors.length > 0" class="span2" v-for="actor in current_actors">{{actor}}<span v-if="current_actors.indexOf(actor) < 4">, </span><span v-else>.</span> </span>
-                            <span class="span2" v-if="current_actors.length == 0">non disponibile.</span>
+                            <span class="span2" v-if="loading_actors">Caricamento cast...</span>
+                            <span class="span2" v-if="current_actors.length == 0 && loading_actors == false">non disponibile.</span>
                         </div>
 
                     </div>

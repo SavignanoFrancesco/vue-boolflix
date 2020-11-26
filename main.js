@@ -20,6 +20,7 @@ var app = new Vue({
             info_index: 0,
         },
         current_actors: [],
+        loading_actors: false,
 
     },
     methods: {
@@ -113,7 +114,8 @@ var app = new Vue({
             }
         },
         getActors(movie_id){
-
+            this.current_actors = [];
+            this.loading_actors = true;
             //richiesta al server(movie_actors)
             axios
                 .get('https://api.themoviedb.org/3/movie/' + movie_id + '/credits?api_key=26a07cb4c3a1c1a713d00530e848c684', {
@@ -125,13 +127,12 @@ var app = new Vue({
                     })
                 .then((risposta) => {
 
-                    this.current_actors = [];
+
                     for (var i = 0; i < 5; i++) {
                         this.current_actors.push(risposta.data.cast[i].name);
                     }
 
-                    console.log(this.current_actors);
-                    console.log(risposta);
+                    this.loading_actors = false;
                 });
 
         },
