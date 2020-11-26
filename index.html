@@ -16,8 +16,28 @@
 
             <header class="header">
 
-                <div class="logo">
-                    <h1>Boolflix</h1>
+                <div class="header-left">
+                    <div class="logo">
+                        <h1>Boolflix</h1>
+                    </div>
+                    <div class="header-btn all" @click="showAll()">
+                        <h2>All Categories</h2>
+                        <div class="red-bar" :class="allcategories_active ? 'active' : ''">
+
+                        </div>
+                    </div>
+                    <div class="header-btn movie" @click="showMovies()">
+                        <h2>Movies</h2>
+                        <div class="red-bar" :class="movies_active ? 'active' : ''">
+
+                        </div>
+                    </div>
+                    <div class="header-btn tvshows" @click="showTVShows()">
+                        <h2>Serie TV</h2>
+                        <div class="red-bar" :class="tvshows_active ? 'active' : ''">
+
+                        </div>
+                    </div>
                 </div>
 
                 <div class="searchbar">
@@ -48,10 +68,10 @@
 
 
             <!-- __________________SEZIONE_DEDICATA_AI_FILM__________________ -->
-            <h2 v-if="movies.length > 0">Movies</h2>
+            <h2 v-if="movies.length > 0 && (movies_active || allcategories_active)">Movies</h2>
 
             <!-- __________________CONTENITORE_CARDS__________________ -->
-            <div class="cards-container">
+            <div class="cards-container movie" :class="!movies_active && !allcategories_active ? 'hidden' : ''">
 
                 <!-- __________________CARD__________________ -->
                 <div class="card" v-for="(movie,index) in movies">
@@ -155,9 +175,9 @@
             <!-- __________________FINE_SEZIONE_DEDICATA_AI_FILM__________________ -->
 
             <!-- __________________SEZIONE_DEDICATA_ALLE_SERIE_TV__________________ -->
-            <h2 v-if="tvshows.length > 0">Serie TV</h2>
-            <div class="cards-container">
-                <div class="card" v-for="(show, index) in tvshows">
+            <h2 v-if="tvshows.length > 0 && (tvshows_active || allcategories_active)">Serie TV</h2>
+            <div class="cards-container tvshows" :class="!tvshows_active && !allcategories_active ? 'hidden' : ''">
+                <div class="card" v-for="(show, index) in tvshows" vi-if="tvshows_active">
 
                     <div class="card-cover">
                         <img :src="cover_starting_url + cover_size + show.poster_path" alt="" v-if="show.poster_path != null">

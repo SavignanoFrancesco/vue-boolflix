@@ -36,6 +36,45 @@ h2{
     justify-content: space-between;
     align-items: center;
     background: black;
+    z-index: 1;
+}
+
+.header-left{
+    display: flex;
+    align-items: baseline;
+}
+
+.header-btn{
+    display: flex;
+    align-items: baseline;
+    margin-left: 30px;
+    position: relative;
+    z-index: 3;
+}
+
+.red-bar{
+    width: 40px;
+    height: 80px;
+    background: #b30000;
+    position: absolute;
+    transform: translate(-50%, -100%);
+    left: 52%;
+    top: 141%;
+    border-bottom-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+    z-index: -1;
+    display: none;
+}
+.red-bar.active{
+    display: block
+}
+
+.header-btn h2{
+    font-size: 25px;
+}
+
+.header-btn:hover{
+    cursor: pointer;
 }
 
 .logo{
@@ -92,6 +131,12 @@ h2{
     margin-top: 5px;
     display: flex;
     flex-wrap: wrap;
+}
+.cards-container.movie.hidden{
+    display: none;
+}
+.cards-container.tvshows.hidden{
+    display: none;
 }
 
 .card{
@@ -226,3 +271,5 @@ h2{
 .language-flag img{
     width: 20px;
 }
+
+/* HOVER FXS */

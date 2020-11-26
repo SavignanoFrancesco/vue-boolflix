@@ -2,6 +2,9 @@ var app = new Vue({
     el: '#root',
     data: {
         first_page_load: true,
+        allcategories_active: true,
+        movies_active: false,
+        tvshows_active: false,
         api_key: '26a07cb4c3a1c1a713d00530e848c684',
         language: 'it',
         title_searched: '',
@@ -29,6 +32,21 @@ var app = new Vue({
 
     },
     methods: {
+        showAll(){
+            this.allcategories_active = true;
+            this.tvshows_active = false;
+            this.movies_active = false;
+        },
+        showMovies(){
+            this.allcategories_active = false;
+            this.tvshows_active = false;
+            this.movies_active = true;
+        },
+        showTVShows(){
+            this.allcategories_active = false;
+            this.movies_active = false;
+            this.tvshows_active = true;
+        },
         titleRequest(){
 
             // l'utente ha fatto la prima interazione
