@@ -85,6 +85,7 @@
                             <i v-if="getVote(movie)" class="fa-star" :class="i <= getVote(movie) ? 'fas' : 'far'" v-for="i in max_vote"></i>
                             <span class="span2" v-if="getVote(movie) == 0"><strong>N/A</strong></span>
                         </div>
+
                         <div class="overview">
                             <span class="span1">Trama: </span>
                             <span class="span2" v-if="movie.overview.length > 100">{{movie.overview.slice(0, 99)}}[...]</span>
@@ -100,7 +101,7 @@
                 </div>
                 <!-- __________________CARD_CHIUSA__________________ -->
 
-                <!-- __________________HIDDEN_ INFO__________________ -->
+                <!-- __________________HIDDEN_ INFO_MOVIE__________________ -->
                 <div v-if="movies.length > 0" class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
 
                     <div class="quit-info">
@@ -120,6 +121,12 @@
                     <div class="original-title">
                         <span class="span1">Titolo originale: </span>
                         <span class="span2">{{movies[hidden_info.info_index].original_title}}</span>
+                    </div>
+
+                    <div class="language-flag">
+                        <span class="span1">Lingua originale: </span>
+                        <span class="span2" v-if="!known_languages.includes(movies[hidden_info.info_index].original_language)">{{movies[hidden_info.info_index].original_language}}</span>
+                        <img v-else :src="getLanguageFlag(movies[hidden_info.info_index])" :alt="movies[hidden_info.info_index].original_language">
                     </div>
 
                     <div class="vote">
@@ -148,7 +155,7 @@
             <!-- __________________FINE_SEZIONE_DEDICATA_AI_FILM__________________ -->
 
             <!-- __________________SEZIONE_DEDICATA_ALLE_SERIE_TV__________________ -->
-            <!-- <h2 v-if="tvshows.length > 0">Serie TV</h2>
+            <h2 v-if="tvshows.length > 0">Serie TV</h2>
             <div class="cards-container">
                 <div class="card" v-for="show in tvshows">
 
@@ -176,12 +183,12 @@
 
                         <div class="vote">
                             <span>Voto: </span>
-                            <i v-if="Math.round(show.vote_average / 2); > 0" class="fa-star" :class="i <= Math.round(show.vote_average / 2); ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span v-if="Math.round(show.vote_average / 2); == 0"><strong>N/A</strong></span>
+                            <i v-if="getVote(show) > 0" class="fa-star" :class="i <= getVote(show) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span v-if="getVote(show) == 0"><strong>N/A</strong></span>
                         </div>
                     </div>
                     </div>
-            </div> -->
+            </div>
 
 
         </div>
