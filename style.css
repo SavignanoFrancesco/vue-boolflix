@@ -95,6 +95,7 @@ h2{
 }
 
 .card{
+    height: 58vh;
     width: calc((100% - 50px) / 5);
     margin:0 5px 10px 5px;
     /* height: 350px; */
