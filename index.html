@@ -53,6 +53,7 @@
 
                     <!-- __________________SHOWED_INFO__________________ -->
                     <div class="card-info">
+
                         <div class="italian-title">
                             <span class="span1">Titolo italiano: </span>
                             <span class="span2">{{movie.title}}</span>
@@ -75,7 +76,7 @@
                         </div>
                         <div class="overview">
                             <span class="span1">Trama: </span>
-                            <span v-if="movie.overview.length > 100">{{movie.overview.slice(0, 99)}}[...]</span>
+                            <span class="span2" v-if="movie.overview.length > 100">{{movie.overview.slice(0, 99)}}[...]</span>
                             <span v-if="movie.overview.length <= 100" class="span2">{{movie.overview}}</span>
                             <span class="span2" v-if="movie.overview == ''">Non disponibile</span>
                         </div>
@@ -87,12 +88,37 @@
 
                     <!-- __________________HDDEN_ INFO__________________ -->
                     <div class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
+
                         <div class="quit-info">
                             <i @click="showMoreInfo(index)" class="fas fa-undo-alt"></i>
                         </div>
-                        <span>Trama: </span>
-                        <span v-if="movies[hidden_info.info_index].overview == ''">Non disponibile</span>
-                        <span v-else>{{movies[hidden_info.info_index].overview}}</span>
+
+                        <div class="hidden-cover">
+                            <img :src="cover_starting_url + cover_size + movies[hidden_info.info_index].poster_path" alt="" v-if="movies[hidden_info.info_index].poster_path != null">
+                            <img src="no_cover/no_cover.jpg" alt="" v-else>
+                        </div>
+
+                        <div class="italian-title">
+                            <span class="span1">Titolo italiano: </span>
+                            <span class="span2">{{movies[hidden_info.info_index].title}}</span>
+                        </div>
+
+                        <div class="original-title">
+                            <span class="span1">Titolo originale: </span>
+                            <span class="span2">{{movies[hidden_info.info_index].original_title}}</span>
+                        </div>
+
+                        <div class="vote">
+                            <span class="span1">Voto: </span>
+                                <i v-if="Math.round(movies[hidden_info.info_index].vote_average / 2) > 0" class="fa-star" :class="i <= Math.round(movies[hidden_info.info_index].vote_average / 2) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span class="span2" v-if="Math.round(movies[hidden_info.info_index].vote_average / 2) == 0"><strong>N/A</strong></span>
+                        </div>
+
+                        <div class="overview">
+                            <span class="span1">Trama: </span>
+                            <span class="span2" v-if="movies[hidden_info.info_index].overview == ''">Non disponibile</span>
+                            <span class="span2" v-else>{{movies[hidden_info.info_index].overview}}</span>
+                        </div>
 
                     </div>
 
