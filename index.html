@@ -110,8 +110,8 @@
 
                         <div class="vote">
                             <span class="span1">Voto: </span>
-                                <i v-if="getVote(movie) > 0" class="fa-star" :class="i <= getVote(movie) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span class="span2" v-if="getVote(movie) == 0"><strong>N/A</strong></span>
+                                <i v-if="getVote(movies[hidden_info.info_index]) > 0" class="fa-star" :class="i <= getVote(movies[hidden_info.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                            <span class="span2" v-if="getVote(movies[hidden_info.info_index]) == 0"><strong>N/A</strong></span>
                         </div>
 
                         <div class="overview">
