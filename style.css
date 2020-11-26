@@ -153,8 +153,10 @@ h2{
     background: black;
     border: 2px solid white;
     overflow-y: scroll;
+    z-index: 10;
     display: none;
 }
+
 
 ::-webkit-scrollbar {
     width: 0px;

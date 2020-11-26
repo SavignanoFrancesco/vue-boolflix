@@ -19,6 +19,7 @@ var app = new Vue({
             clicked_flag: false,
             info_index: 0,
         },
+        current_actors: [],
 
     },
     methods: {
@@ -110,6 +111,29 @@ var app = new Vue({
             }else{
                 alert('Devi inserire qualcosa nell\'input!!');
             }
+        },
+        getActors(movie_id){
+
+            //richiesta al server(movie_actors)
+            axios
+                .get('https://api.themoviedb.org/3/movie/' + movie_id + '/credits?api_key=26a07cb4c3a1c1a713d00530e848c684', {
+                    params:
+                        {
+                            api_key: this.api_key,
+                            movie_id: movie_id,
+                        }
+                    })
+                .then((risposta) => {
+
+                    this.current_actors = [];
+                    for (var i = 0; i < 5; i++) {
+                        this.current_actors.push(risposta.data.cast[i].name);
+                    }
+
+                    console.log(this.current_actors);
+                    console.log(risposta);
+                });
+
         },
         getVote(title){
 
