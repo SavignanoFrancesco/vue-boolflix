@@ -186,6 +186,17 @@
                             <i v-if="getVote(show) > 0" class="fa-star" :class="i <= getVote(show) ? 'fas' : 'far'" v-for="i in max_vote"></i>
                             <span v-if="getVote(show) == 0"><strong>N/A</strong></span>
                         </div>
+
+                        <div class="overview">
+                            <span class="span1">Trama: </span>
+                            <span class="span2" v-if="show.overview.length > 100">{{show.overview.slice(0, 99)}}[...]</span>
+                            <span v-if="show.overview.length <= 100" class="span2">{{show.overview}}</span>
+                            <span class="span2" v-if="show.overview == ''">Non disponibile</span>
+                        </div>
+                        <!-- @click="showMoreInfo(index);getActors(show.id);" -->
+                        <div class="info-btn">
+                            <span>Visualizzza più informazioni</span>
+                        </div>
                     </div>
                     </div>
             </div>
