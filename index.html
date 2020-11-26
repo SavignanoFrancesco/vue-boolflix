@@ -33,16 +33,20 @@
             <h3 v-if="loading_tvshows">Ricerca serie tv in corso...</h3>
 
             <div class="results" v-if="title_searched_support.length > 0">
-                <h3>Risultati della la ricerca: '{{title_searched_support}}'</h3>
+                <h3>Risultati della ricerca: '{{title_searched_support}}'</h3>
 
                 <h3 v-if="no_results_movies">Nessun film trovato...</h3>
                 <h3 v-if="no_results_tvshows">Nessuna serie tv trovata...</h3>
             </div>
 
 
-
+            <!-- __________________SEZIONE_DEDICATA_AI_FILM__________________ -->
             <h2 v-if="movies.length > 0">Movies</h2>
+
+            <!-- __________________CONTENITORE_CARDS__________________ -->
             <div class="cards-container">
+
+                <!-- __________________CARD__________________ -->
                 <div class="card" v-for="(movie,index) in movies">
 
                     <!-- __________________COVER__________________ -->
@@ -87,8 +91,9 @@
                     </div>
 
                 </div>
+                <!-- __________________CARD_CHIUSA__________________ -->
 
-                <!-- __________________HDDEN_ INFO__________________ -->
+                <!-- __________________HIDDEN_ INFO__________________ -->
                 <div v-if="movies.length > 0" class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
 
                     <div class="quit-info">
@@ -132,7 +137,10 @@
                 </div>
 
             </div>
+            <!-- __________________FINE_CONTENITORE_CARDS__________________ -->
+            <!-- __________________FINE_SEZIONE_DEDICATA_AI_FILM__________________ -->
 
+            <!-- __________________SEZIONE_DEDICATA_ALLE_SERIE_TV__________________ -->
             <!-- <h2 v-if="tvshows.length > 0">Serie TV</h2>
             <div class="cards-container">
                 <div class="card" v-for="show in tvshows">

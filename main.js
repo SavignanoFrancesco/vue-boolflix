@@ -72,8 +72,8 @@ var app = new Vue({
                             this.no_results_movies = false;
                         }
 
-                        console.log(this.no_results_movies);
-                        console.log('QUA!',this.movies);
+                        // console.log(this.no_results_movies);
+                        // console.log('QUA!',this.movies);
                     });
 
                     // //inizio caricamento
@@ -128,6 +128,7 @@ var app = new Vue({
                     })
                 .then((risposta) => {
 
+                    //controllo quantità membri del cast
                     if (risposta.data.cast.length > 5) {
                         for (var i = 0; i < 5; i++) {
                             this.current_actors.push(risposta.data.cast[i].name);
@@ -144,7 +145,7 @@ var app = new Vue({
 
         },
         getVote(title){
-
+            //voto da base 10 a base 5
             return Math.round(title.vote_average / 2);
 
         },
@@ -154,8 +155,10 @@ var app = new Vue({
 
         },
         showMoreInfo(index){
+            //prelevo l'index della carta cliccata
             this.hidden_info.info_index = index;
-            console.log(this.hidden_info.info_index);
+
+            //toggle per apreire e chiudere hidden-info
             if (this.hidden_info.clicked_flag) {
                 this.hidden_info.clicked_flag = false;
             }else{
@@ -164,9 +167,6 @@ var app = new Vue({
         },
     },
     mounted() {
-
-
-
 
 
     }
