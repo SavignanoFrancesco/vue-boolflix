@@ -128,10 +128,16 @@ var app = new Vue({
                     })
                 .then((risposta) => {
 
-
-                    for (var i = 0; i < 5; i++) {
-                        this.current_actors.push(risposta.data.cast[i].name);
+                    if (risposta.data.cast.length > 5) {
+                        for (var i = 0; i < 5; i++) {
+                            this.current_actors.push(risposta.data.cast[i].name);
+                        }
+                    }else{
+                        for (var i = 0; i < risposta.data.cast.length; i++) {
+                            this.current_actors.push(risposta.data.cast[i].name);
+                        }
                     }
+
 
                     this.loading_actors = false;
                 });
