@@ -136,6 +136,11 @@ h2{
     color: red;
 }
 
+.info-btn:hover{
+    color: rgba(255,0,0,0.8);
+}
+
+
 .hidden-info{
     color: white;
     position: fixed;
@@ -164,6 +169,10 @@ h2{
 .quit-info{
     color: red;
     margin-bottom: 5px;
+}
+
+.quit-info:hover{
+    color: rgba(255,0,0,0.8);
 }
 
 .hidden-info .italian-title{
