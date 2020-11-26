@@ -86,47 +86,47 @@
 
                     </div>
 
-                    <!-- __________________HDDEN_ INFO__________________ -->
-                    <div class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
+                </div>
 
-                        <div class="quit-info">
-                            <i @click="showMoreInfo(index)" class="fas fa-undo-alt"></i>
-                        </div>
+                <!-- __________________HDDEN_ INFO__________________ -->
+                <div v-if="movies.length > 0" class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
 
-                        <div class="hidden-cover">
-                            <img :src="cover_starting_url + cover_size + movies[hidden_info.info_index].poster_path" alt="" v-if="movies[hidden_info.info_index].poster_path != null">
-                            <img src="no_cover/no_cover.jpg" alt="" v-else>
-                        </div>
+                    <div class="quit-info">
+                        <i @click="showMoreInfo(hidden_info.info_index)" class="fas fa-undo-alt"></i>
+                    </div>
 
-                        <div class="italian-title">
-                            <span class="span1">Titolo italiano: </span>
-                            <span class="span2">{{movies[hidden_info.info_index].title}}</span>
-                        </div>
+                    <div class="hidden-cover">
+                        <img :src="cover_starting_url + cover_size + movies[hidden_info.info_index].poster_path" alt="" v-if="movies[hidden_info.info_index].poster_path != null">
+                        <img src="no_cover/no_cover.jpg" alt="" v-else>
+                    </div>
 
-                        <div class="original-title">
-                            <span class="span1">Titolo originale: </span>
-                            <span class="span2">{{movies[hidden_info.info_index].original_title}}</span>
-                        </div>
+                    <div class="italian-title">
+                        <span class="span1">Titolo italiano: </span>
+                        <span class="span2">{{movies[hidden_info.info_index].title}}</span>
+                    </div>
 
-                        <div class="vote">
-                            <span class="span1">Voto: </span>
-                                <i v-if="getVote(movies[hidden_info.info_index]) > 0" class="fa-star" :class="i <= getVote(movies[hidden_info.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span class="span2" v-if="getVote(movies[hidden_info.info_index]) == 0"><strong>N/A</strong></span>
-                        </div>
+                    <div class="original-title">
+                        <span class="span1">Titolo originale: </span>
+                        <span class="span2">{{movies[hidden_info.info_index].original_title}}</span>
+                    </div>
 
-                        <div class="overview">
-                            <span class="span1">Trama: </span>
-                            <span class="span2" v-if="movies[hidden_info.info_index].overview == ''">Non disponibile</span>
-                            <span class="span2" v-else>{{movies[hidden_info.info_index].overview}}</span>
-                        </div>
+                    <div class="vote">
+                        <span class="span1">Voto: </span>
+                            <i v-if="getVote(movies[hidden_info.info_index]) > 0" class="fa-star" :class="i <= getVote(movies[hidden_info.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                        <span class="span2" v-if="getVote(movies[hidden_info.info_index]) == 0"><strong>N/A</strong></span>
+                    </div>
 
-                        <div class="cast">
-                            <span class="span1">Nel cast: </span>
-                            <span v-if="current_actors.length > 0" class="span2" v-for="actor in current_actors">{{actor}}<span v-if="current_actors.indexOf(actor) < (current_actors.length - 1)">, </span><span v-else></span> </span>
-                            <span class="span2" v-if="loading_actors">Caricamento cast...</span>
-                            <span class="span2" v-if="current_actors.length == 0 && loading_actors == false">non disponibile.</span>
-                        </div>
+                    <div class="overview">
+                        <span class="span1">Trama: </span>
+                        <span class="span2" v-if="movies[hidden_info.info_index].overview == ''">Non disponibile</span>
+                        <span class="span2" v-else>{{movies[hidden_info.info_index].overview}}</span>
+                    </div>
 
+                    <div class="cast">
+                        <span class="span1">Nel cast: </span>
+                        <span v-if="current_actors.length > 0" class="span2" v-for="actor in current_actors">{{actor}}<span v-if="current_actors.indexOf(actor) < (current_actors.length - 1)">, </span><span v-else></span> </span>
+                        <span class="span2" v-if="loading_actors">Caricamento cast...</span>
+                        <span class="span2" v-if="current_actors.length == 0 && loading_actors == false">non disponibile.</span>
                     </div>
 
                 </div>
