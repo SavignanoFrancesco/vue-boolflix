@@ -115,6 +115,7 @@ var app = new Vue({
                     //     });
             }else{
                 alert('Devi inserire qualcosa nell\'input!!');
+                this.first_page_load = true;
             }
         },
         getActors(movie_id){
