@@ -1,7 +1,6 @@
 var app = new Vue({
     el: '#root',
     data: {
-        movies_and_shows: [],
         first_page_load: true,
         allcategories_active: true,
         movies_active: false,
@@ -24,6 +23,10 @@ var app = new Vue({
             clicked_flag: false,
             info_index: 0,
         },
+        hidden_info_shows: {
+            clicked_flag: false,
+            info_index: 0,
+        },
         current_actors: [],
         loading_actors: false,
         movies_genres_api: [],
@@ -32,21 +35,21 @@ var app = new Vue({
 
     },
     methods: {
-        // showAll(){
-        //     this.allcategories_active = true;
-        //     this.tvshows_active = false;
-        //     this.movies_active = false;
-        // },
-        // showMovies(){
-        //     this.allcategories_active = false;
-        //     this.tvshows_active = false;
-        //     this.movies_active = true;
-        // },
-        // showTVShows(){
-        //     this.allcategories_active = false;
-        //     this.movies_active = false;
-        //     this.tvshows_active = true;
-        // },
+        showAll(){
+            this.allcategories_active = true;
+            this.tvshows_active = false;
+            this.movies_active = false;
+        },
+        showMovies(){
+            this.allcategories_active = false;
+            this.tvshows_active = false;
+            this.movies_active = true;
+        },
+        showTVShows(){
+            this.allcategories_active = false;
+            this.movies_active = false;
+            this.tvshows_active = true;
+        },
         moviesGenresRequest(){
             this.movies_genres_api = [];
 
@@ -82,6 +85,8 @@ var app = new Vue({
             for (var i = 0; i < this.movies_genres_ids.length; i++){
                 this.movies_genres_names[i] = this.movies_genres_ids[i].slice();
             }
+
+            console.log('rotto?: ',);
 
             //scorro l'array dei film cercati contentente gli id(prima dmensione)
             for (var i = 0; i < this.movies_genres_ids.length; i++) {
@@ -156,10 +161,6 @@ var app = new Vue({
                         }else{
                             this.no_results_movies = false;
 
-                            //unisco film e serie tv
-                            this.movies_and_shows = [...this.movies,...this.tvshows];
-                            console.log(this.movies_and_shows);
-
                             //prelevo i generi dei titoli cercati
                             this.getMoviesGenresIds();
                             this.getMoviesGenresNames()
@@ -196,13 +197,8 @@ var app = new Vue({
                                 this.no_results_tvshows = false;
                             }
 
-                            //unisco film e serie tv
-                            this.movies_and_shows = [...this.movies,...this.tvshows];
-                            console.log(this.movies_and_shows);
                             // console.log(this.tvshows);
                         });
-
-
             }else{
                 // this.first_page_load = true;
             }
@@ -237,16 +233,16 @@ var app = new Vue({
                 });
 
         },
-        getActorsShow(movie_id){
+        getActorsShow(show_id){
             this.current_actors = [];
             this.loading_actors = true;
             //richiesta al server(movie_actors)
             axios
-                .get('https://api.themoviedb.org/3/tv/' + movie_id + '/credits?api_key=26a07cb4c3a1c1a713d00530e848c684', {
+                .get('https://api.themoviedb.org/3/tv/' + show_id + '/credits?api_key=26a07cb4c3a1c1a713d00530e848c684', {
                     params:
                         {
                             api_key: this.api_key,
-                            movie_id: movie_id,
+                            show_id: show_id,
                         }
                     })
                 .then((risposta) => {
@@ -288,7 +284,17 @@ var app = new Vue({
                 this.hidden_info.clicked_flag = true;
             }
         },
+        showMoreInfoShows(index){
+            //prelevo l'index della carta cliccata
+            this.hidden_info_shows.info_index = index;
 
+            //toggle per apreire e chiudere hidden-info
+            if (this.hidden_info_shows.clicked_flag) {
+                this.hidden_info_shows.clicked_flag = false;
+            }else{
+                this.hidden_info_shows.clicked_flag = true;
+            }
+        },
     },
     mounted() {
         this.moviesGenresRequest();
