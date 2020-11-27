@@ -17,11 +17,11 @@
             <!-- __________________HEADER_________________ -->
             <header class="header">
 
-                <div class="header-left">
+                <!-- <div class="header-left"> -->
                     <div class="logo">
                         <h1>Boolflix</h1>
                     </div>
-                    <div class="header-btn all" @click="showAll()">
+                    <!-- <div class="header-btn all" @click="showAll()">
                         <h2 :class="allcategories_active ? '' : 'not-selected'">Tutte le categorie</h2>
                         <div class="red-bar" :class="allcategories_active ? 'active' : ''">
 
@@ -39,7 +39,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="searchbar">
                     <input v-model="title_searched" type="text" class="search-input" @keyup.enter="titleRequest()">
@@ -79,7 +79,7 @@
 
                 <!-- __________________SEZIONE_DEDICATA_AI_FILM__________________ -->
                 <!-- __________________CARD__________________ -->
-                <div class="card  movie" :class="!movies_active && !allcategories_active ? 'hidden' : ''" v-for="(movie,index) in movies">
+                <div class="card" :class="!movies_active && !allcategories_active ? 'hidden' : ''" v-for="(movie,index) in movies_and_shows">
 
                     <!-- __________________COVER__________________ -->
                     <div class="card-cover">
@@ -92,11 +92,11 @@
 
                         <div class="italian-title">
                             <span class="span1">Titolo italiano: </span>
-                            <span class="span2">{{movie.title}}</span>
+                            <span class="span2">{{movie.title ? movie.title : movie.name}}</span>
                         </div>
                         <div class="original-title">
                             <span class="span1">Titolo originale: </span>
-                            <span class="span2">{{movie.original_title}}</span>
+                            <span class="span2">{{movie.original_title ? movie.original_title : movie.original_name}}</span>
                         </div>
 
                         <div class="genre">
@@ -123,7 +123,8 @@
                             <span class="span2" v-if="movie.overview == ''">Non disponibile</span>
                         </div>
                         <div class="info-btn">
-                            <span @click="showMoreInfo(index);getActors(movie.id);">Visualizzza più informazioni</span>
+                            <span v-if="movie.title" @click="showMoreInfo(index);getActors(movie.id);">Visualizzza più informazioni</span>
+                            <span v-if="movie.name" @click="showMoreInfo(index);getActorsShow(movie.id);">Visualizzza più informazioni</span>
                         </div>
 
                     </div>
@@ -132,46 +133,46 @@
                 <!-- __________________CARD_CHIUSA__________________ -->
 
                 <!-- __________________HIDDEN_ INFO_MOVIE__________________ -->
-                <div v-if="movies.length > 0" class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
+                <div v-if="movies_and_shows.length > 0" class="hidden-info" :class="hidden_info.clicked_flag ? 'active' : ''">
 
                     <div class="quit-info">
                         <i @click="showMoreInfo(hidden_info.info_index)" class="fas fa-undo-alt"></i>
                     </div>
 
                     <div class="hidden-cover">
-                        <img :src="cover_starting_url + cover_size + movies[hidden_info.info_index].poster_path" alt="" v-if="movies[hidden_info.info_index].poster_path != null">
+                        <img :src="cover_starting_url + cover_size + movies_and_shows[hidden_info.info_index].poster_path" alt="" v-if="movies_and_shows[hidden_info.info_index].poster_path != null">
                         <img src="no_cover/no_cover.jpg" alt="" v-else>
                     </div>
 
                     <div class="italian-title">
                         <span class="span1">Titolo italiano: </span>
-                        <span class="span2">{{movies[hidden_info.info_index].title}}</span>
+                        <span class="span2">{{movies_and_shows[hidden_info.info_index].title ? movies_and_shows[hidden_info.info_index].title : movies_and_shows[hidden_info.info_index].name}}</span>
                     </div>
 
                     <div class="original-title">
                         <span class="span1">Titolo originale: </span>
-                        <span class="span2">{{movies[hidden_info.info_index].original_title}}</span>
+                        <span class="span2">{{movies_and_shows[hidden_info.info_index].original_title ? movies_and_shows[hidden_info.info_index].original_title : movies_and_shows[hidden_info.info_index].original_name}}</span>
                     </div>
 
                     <div class="language-flag">
                         <span class="span1">Lingua originale: </span>
-                        <span class="span2" v-if="!known_languages.includes(movies[hidden_info.info_index].original_language)">{{movies[hidden_info.info_index].original_language}}</span>
-                        <img v-else :src="getLanguageFlag(movies[hidden_info.info_index])" :alt="movies[hidden_info.info_index].original_language">
+                        <span class="span2" v-if="!known_languages.includes(movies_and_shows[hidden_info.info_index].original_language)">{{movies_and_shows[hidden_info.info_index].original_language}}</span>
+                        <img v-else :src="getLanguageFlag(movies_and_shows[hidden_info.info_index])" :alt="movies_and_shows[hidden_info.info_index].original_language">
                     </div>
 
                     <div class="vote">
                         <span class="span1">Voto: </span>
-                            <i v-if="getVote(movies[hidden_info.info_index]) > 0" class="fa-star" :class="i <= getVote(movies[hidden_info.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                        <span class="span2" v-if="getVote(movies[hidden_info.info_index]) == 0"><strong>N/A</strong></span>
+                            <i v-if="getVote(movies_and_shows[hidden_info.info_index]) > 0" class="fa-star" :class="i <= getVote(movies_and_shows[hidden_info.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
+                        <span class="span2" v-if="getVote(movies_and_shows[hidden_info.info_index]) == 0"><strong>N/A</strong></span>
                     </div>
 
                     <div class="overview">
                         <span class="span1">Trama: </span>
-                        <span class="span2" v-if="movies[hidden_info.info_index].overview == ''">Non disponibile</span>
-                        <span class="span2" v-else>{{movies[hidden_info.info_index].overview}}</span>
+                        <span class="span2" v-if="movies_and_shows[hidden_info.info_index].overview == ''">Non disponibile</span>
+                        <span class="span2" v-else>{{movies_and_shows[hidden_info.info_index].overview}}</span>
                     </div>
 
-                    <div class="cast">
+                    <div class="cast movie">
                         <span class="span1">Nel cast: </span>
                         <span v-if="current_actors.length > 0" class="span2" v-for="actor in current_actors">{{actor}}<span v-if="current_actors.indexOf(actor) < (current_actors.length - 1)">, </span><span v-else></span> </span>
                         <span class="span2" v-if="loading_actors">Caricamento cast...</span>
@@ -181,99 +182,6 @@
                 </div>
             <!-- __________________FINE_SEZIONE_DEDICATA_AI_FILM__________________ -->
 
-            <!-- __________________SEZIONE_DEDICATA_ALLE_SERIE_TV__________________ -->
-                <div class="card tvshows" :class="!tvshows_active && !allcategories_active ? 'hidden' : ''" v-for="(show, index) in tvshows" vi-if="tvshows_active">
-
-                    <div class="card-cover">
-                        <img :src="cover_starting_url + cover_size + show.poster_path" alt="" v-if="show.poster_path != null">
-                        <img src="no_cover/no_cover.jpg" alt="" v-else>
-                    </div>
-
-                    <div class="card-info">
-                        <div class="italian-title">
-                            <span>Titolo italiano: </span>
-                            <h4>{{show.name}}</h4>
-                        </div>
-                        <div class="original-title">
-                            <span>Titolo originale: </span>
-                            <h4>{{show.original_name}}</h4>
-                        </div>
-
-
-                        <div class="language-flag">
-                            <span>Lingua originale: </span>
-                            <span v-if="!known_languages.includes(show.original_language)">{{show.original_language}}</span>
-                            <img v-else :src="getLanguageFlag(show)" :alt="show.original_language">
-                        </div>
-
-                        <div class="vote">
-                            <span>Voto: </span>
-                            <i v-if="getVote(show) > 0" class="fa-star" :class="i <= getVote(show) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                            <span v-if="getVote(show) == 0"><strong>N/A</strong></span>
-                        </div>
-
-                        <div class="overview">
-                            <span class="span1">Trama: </span>
-                            <span class="span2" v-if="show.overview.length > 100">{{show.overview.slice(0, 99)}}[...]</span>
-                            <span v-if="show.overview.length <= 100" class="span2">{{show.overview}}</span>
-                            <span class="span2" v-if="show.overview == ''">Non disponibile</span>
-                        </div>
-                        <!--  -->
-                        <div class="info-btn" >
-                            <span @click="showMoreInfoShows(index);getActorsShow(show.id);">Visualizzza più informazioni</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- __________________HIDDEN_INFO_SERIETV__________________ -->
-                <div v-if="tvshows.length > 0" class="hidden-info" :class="hidden_info_shows.clicked_flag ? 'active' : ''">
-
-                    <div class="quit-info">
-                        <i @click="showMoreInfoShows(hidden_info_shows.info_index)" class="fas fa-undo-alt"></i>
-                    </div>
-
-                    <div class="hidden-cover">
-                        <img :src="cover_starting_url + cover_size + tvshows[hidden_info_shows.info_index].poster_path" alt="" v-if="tvshows[hidden_info_shows.info_index].poster_path != null">
-                        <img src="no_cover/no_cover.jpg" alt="" v-else>
-                    </div>
-
-                    <div class="italian-title">
-                        <span class="span1">Titolo italiano: </span>
-                        <span class="span2">{{tvshows[hidden_info_shows.info_index].name}}</span>
-                    </div>
-
-                    <div class="original-title">
-                        <span class="span1">Titolo originale: </span>
-                        <span class="span2">{{tvshows[hidden_info_shows.info_index].original_name}}</span>
-                    </div>
-
-                    <div class="language-flag">
-                        <span class="span1">Lingua originale: </span>
-                        <span class="span2" v-if="!known_languages.includes(tvshows[hidden_info_shows.info_index].original_language)">{{tvshows[hidden_info_shows.info_index].original_language}}</span>
-                        <img v-else :src="getLanguageFlag(tvshows[hidden_info_shows.info_index])" :alt="tvshows[hidden_info_shows.info_index].original_language">
-                    </div>
-
-                    <div class="vote">
-                        <span class="span1">Voto: </span>
-                            <i v-if="getVote(tvshows[hidden_info_shows.info_index]) > 0" class="fa-star" :class="i <= getVote(tvshows[hidden_info_shows.info_index]) ? 'fas' : 'far'" v-for="i in max_vote"></i>
-                        <span class="span2" v-if="getVote(tvshows[hidden_info_shows.info_index]) == 0"><strong>N/A</strong></span>
-                    </div>
-
-                    <div class="overview">
-                        <span class="span1">Trama: </span>
-                        <span class="span2" v-if="tvshows[hidden_info_shows.info_index].overview == ''">Non disponibile</span>
-                        <span class="span2" v-else>{{tvshows[hidden_info_shows.info_index].overview}}</span>
-                    </div>
-
-                    <div class="cast">
-                        <span class="span1">Nel cast: </span>
-                        <span v-if="current_actors.length > 0" class="span2" v-for="actor in current_actors">{{actor}}<span v-if="current_actors.indexOf(actor) < (current_actors.length - 1)">, </span><span v-else></span> </span>
-                        <span class="span2" v-if="loading_actors">Caricamento cast...</span>
-                        <span class="span2" v-if="current_actors.length == 0 && loading_actors == false">non disponibile.</span>
-                    </div>
-
-                </div>
-                <!-- ________________FINE_SEZIONE_DEDICATA_ALLE_SERIE_TV_______________ -->
 
             </div>
             <!-- __________________FINE_CONTENITORE_CARTE__________________ -->
