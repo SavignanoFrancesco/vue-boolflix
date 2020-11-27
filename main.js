@@ -29,6 +29,8 @@ var app = new Vue({
         },
         current_actors: [],
         loading_actors: false,
+        movies_genres: [],
+        movies_genres_name: [],
 
     },
     methods: {
@@ -47,22 +49,43 @@ var app = new Vue({
             this.movies_active = false;
             this.tvshows_active = true;
         },
+        moviesGenresRequest(){
+            this.movies_genres = [];
+
+            //richiesta al server(movies)
+            axios
+                .get('https://api.themoviedb.org/3/genre/movie/list', {
+                    params:
+                        {
+                            api_key: this.api_key,
+                            language: this.language
+                        }
+                    })
+                .then((risposta) => {
+
+                    //metto la risposta dell'API in un array
+                    this.movies_genres = risposta.data.genres;
+                    console.log(this.movies_genres);
+
+                });
+
+        },
         titleRequest(){
 
-            // l'utente ha fatto la prima interazione
-            this.first_page_load = false;
-            //ad ogni richiesta di ricerca reimposta gli array a vuoti
-            this.movies = [];
-            this.tvshows = [];
-
-            //salvo l'imput gestito dal v-bind in una variabile di supporto
-            this.title_searched_support = this.title_searched;
-
-            //dopo averlo salvato,svuota l'input
-            this.title_searched = '';
-
             //non posso inviare una stringa vuota
-            if (this.title_searched_support != '') {
+            if (this.title_searched != '') {
+
+                // l'utente ha fatto la prima interazione
+                this.first_page_load = false;
+                //ad ogni richiesta di ricerca reimposta gli array a vuoti
+                this.movies = [];
+                this.tvshows = [];
+
+                //salvo l'imput gestito dal v-bind in una variabile di supporto
+                this.title_searched_support = this.title_searched;
+
+                //dopo averlo salvato,svuota l'input
+                this.title_searched = '';
 
                 //inizio caricamento
                 this.loading_movies = true;
@@ -131,8 +154,7 @@ var app = new Vue({
                             console.log(this.tvshows);
                         });
             }else{
-                alert('Devi inserire qualcosa nell\'input!!');
-                this.first_page_load = true;
+                // this.first_page_load = true;
             }
         },
         getActors(movie_id){
@@ -229,7 +251,7 @@ var app = new Vue({
         },
     },
     mounted() {
-
+        this.moviesGenresRequest();
 
     }
 });

@@ -55,11 +55,11 @@ h2{
 .red-bar{
     width: 40px;
     height: 5px;
-    background: #b30000;
+    background: red;
     position: absolute;
     transform: translate(-50%, -100%);
     left: 52%;
-    top: 145%;
+    top: 143%;
     border-radius: 2px;
     /* border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px; */
@@ -68,6 +68,10 @@ h2{
 }
 .red-bar.active{
     display: block
+}
+
+.not-selected{
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .header-btn h2{

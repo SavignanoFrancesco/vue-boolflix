@@ -14,6 +14,7 @@
 
         <div class="container" id="root">
 
+            <!-- __________________HEADER_________________ -->
             <header class="header">
 
                 <div class="header-left">
@@ -21,19 +22,19 @@
                         <h1>Boolflix</h1>
                     </div>
                     <div class="header-btn all" @click="showAll()">
-                        <h2>Tutte le categorie</h2>
+                        <h2 :class="allcategories_active ? '' : 'not-selected'">Tutte le categorie</h2>
                         <div class="red-bar" :class="allcategories_active ? 'active' : ''">
 
                         </div>
                     </div>
                     <div class="header-btn movie" @click="showMovies()">
-                        <h2>Film</h2>
+                        <h2 :class="movies_active ? '' : 'not-selected'">Film</h2>
                         <div class="red-bar" :class="movies_active ? 'active' : ''">
 
                         </div>
                     </div>
-                    <div class="header-btn tvshows" @click="showTVShows()">
-                        <h2>Serie TV</h2>
+                    <div class="header-btn tvshows" :class="allcategories_active ? '' : 'not-selected'" @click="showTVShows()">
+                        <h2 :class="tvshows_active ? '' : 'not-selected'">Serie TV</h2>
                         <div class="red-bar" :class="tvshows_active ? 'active' : ''">
 
                         </div>
@@ -49,23 +50,24 @@
 
             </header>
 
+            <!-- __________________RISULTATI_RICERCHE__________________ -->
             <h3 v-if="loading_movies">Ricerca film in corso...</h3>
             <h3 v-if="loading_tvshows">Ricerca serie tv in corso...</h3>
 
             <div class="results" v-if="title_searched_support.length > 0">
                 <h3>Risultati della ricerca: '{{title_searched_support}}'</h3>
 
-                <h3 v-if="no_results_movies && !tvshows_active">Nessun film trovato...</h3>
-                <h3 v-if="no_results_tvshows && !movies_active">Nessuna serie tv trovata...</h3>
+                <h3 v-if="no_results_movies && movies_active">Nessun film trovato...</h3>
+                <h3 v-if="no_results_tvshows && tvshows_active">Nessuna serie tv trovata...</h3>
             </div>
 
+            <!-- __________________PAGINA_INIZIALE__________________ -->
+            <div v-if="first_page_load" class="starting-page">
+                <h1 class="logo">Boolflix</h1>
+                <h2>Cerca film e/o serie tv!</h2>
+            </div>
 
-                <div v-if="first_page_load" class="starting-page">
-                    <h1 class="logo">Boolflix</h1>
-                    <h2>Cerca film e/o serie tv!</h2>
-                </div>
-
-
+            __________________TITOLI_CATEGORIE__________________
             <h2 class="category-title" v-if="((movies.length > 0 || tvshows.length) && allcategories_active)">Tutte le categorie</h2>
             <h2 class="category-title" v-if="movies.length > 0 && movies_active">Film</h2>
             <h2 v-if="tvshows.length > 0 && tvshows_active">Serie TV</h2>
@@ -95,6 +97,11 @@
                         <div class="original-title">
                             <span class="span1">Titolo originale: </span>
                             <span class="span2">{{movie.original_title}}</span>
+                        </div>
+
+                        <div class="genre">
+                            <span class="span1">Generi: </span>
+                            <span class="span2"></span>
                         </div>
 
                         <div class="language-flag">
