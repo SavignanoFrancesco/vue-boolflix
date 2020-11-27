@@ -162,7 +162,8 @@
 
                     <div class="genres">
                         <span class="span1">Generi: </span>
-                        <span v-for="genre in movies_genres_names[hidden_info.info_index]" class="span2">[{{genre}}]  </span>
+                        <span v-if="movies_genres_names[hidden_info.info_index].length > 0" v-for="genre in movies_genres_names[hidden_info.info_index]" class="span2">[{{genre}}]  </span>
+                        <span v-if="movies_genres_names[hidden_info.info_index].length == 0" class="span2">Non disponibile</span>
                     </div>
 
                     <div class="overview">

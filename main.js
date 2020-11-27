@@ -86,8 +86,6 @@ var app = new Vue({
                 this.movies_genres_names[i] = this.movies_genres_ids[i].slice();
             }
 
-            console.log('rotto?: ',);
-
             //scorro l'array dei film cercati contentente gli id(prima dmensione)
             for (var i = 0; i < this.movies_genres_ids.length; i++) {
                 //scorro l'array dei film cercati contentente gli id(seconda dmensione)
