@@ -72,7 +72,7 @@ var app = new Vue({
 
         },
         getMoviesGenresIds(){
-
+            this.movies_genres_ids = [];
             for (var i = 0; i < this.movies.length; i++) {
                 this.movies_genres_ids.push(this.movies[i].genre_ids);
             }
