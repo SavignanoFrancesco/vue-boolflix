@@ -77,13 +77,16 @@ var app = new Vue({
                 this.movies_genres_ids.push(this.movies[i].genre_ids);
             }
             // console.log('Generi dei film cercati: ',this.movies_genres_ids);
+
         },
         getMoviesGenresNames(){
 
             //clono l'array per dare all'array di nomi la stessa struttura dell'array degli id
             for (var i = 0; i < this.movies_genres_ids.length; i++){
-                this.movies_genres_names[i] = this.movies_genres_ids.slice();
+                this.movies_genres_names[i] = this.movies_genres_ids[i].slice();
             }
+
+            console.log('rotto?: ',);
 
             //scorro l'array dei film cercati contentente gli id(prima dmensione)
             for (var i = 0; i < this.movies_genres_ids.length; i++) {
