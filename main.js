@@ -29,9 +29,9 @@ var app = new Vue({
         },
         current_actors: [],
         loading_actors: false,
-        movies_genres: [],
+        movies_genres_api: [],
         movies_genres_ids: [],
-        movies_genres_name: [],
+        movies_genres_names: [],
 
     },
     methods: {
@@ -51,7 +51,7 @@ var app = new Vue({
             this.tvshows_active = true;
         },
         moviesGenresRequest(){
-            this.movies_genres = [];
+            this.movies_genres_api = [];
 
             //richiesta al server(movies)
             axios
@@ -65,8 +65,8 @@ var app = new Vue({
                 .then((risposta) => {
 
                     //metto la risposta dell'API in un array
-                    this.movies_genres = risposta.data.genres;
-                    console.log('Movie genres: ',this.movies_genres);
+                    this.movies_genres_api = risposta.data.genres;
+                    // console.log('Movie genres api: ',this.movies_genres_api);
 
                 });
 
@@ -76,7 +76,38 @@ var app = new Vue({
             for (var i = 0; i < this.movies.length; i++) {
                 this.movies_genres_ids.push(this.movies[i].genre_ids);
             }
-            console.log(this.movies_genres_ids);
+            // console.log('Generi dei film cercati: ',this.movies_genres_ids);
+        },
+        getMoviesGenresNames(){
+
+            //clono l'array per dare all'array di nomi la stessa struttura dell'array degli id
+            for (var i = 0; i < this.movies_genres_ids.length; i++){
+                this.movies_genres_names[i] = this.movies_genres_ids.slice();
+            }
+
+            //scorro l'array dei film cercati contentente gli id(prima dmensione)
+            for (var i = 0; i < this.movies_genres_ids.length; i++) {
+                //scorro l'array dei film cercati contentente gli id(seconda dmensione)
+                for (var j = 0; j < this.movies_genres_ids[i].length; j++) {
+                    //scorro i generi ricavati dall'API
+                    for (var k = 0; k < this.movies_genres_api.length; k++) {
+
+                        //confronto e traduco gli id in nomi
+                        if (this.movies_genres_ids[i][j] == this.movies_genres_api[k].id) {
+                            // console.log('movie id: ',this.movies_genres_ids[i]);
+                            // console.log('api id: ',this.movies_genres_api[k].name);
+                            // console.log('ok',this.movies_genres_api[k].name);
+                            this.movies_genres_names[i][j] = (this.movies_genres_api[k].name);
+                        }
+
+                    }
+
+                }
+
+            }
+            console.log('Generi dall\'api: ',this.movies_genres_api);
+            console.log('Generi ID dei film cercati: ',this.movies_genres_ids);
+            console.log('Generi nomi dei film cercati: ', this.movies_genres_names);
         },
         titleRequest(){
 
@@ -129,6 +160,7 @@ var app = new Vue({
 
                             //prelevo i generi dei titoli cercati
                             this.getMoviesGenresIds();
+                            this.getMoviesGenresNames()
                         }
 
                         // console.log(this.no_results_movies);
