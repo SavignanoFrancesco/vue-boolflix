@@ -18,7 +18,7 @@ var app = new Vue({
         no_results_movies: false,
         no_results_tvshows: false,
         cover_starting_url: 'https://image.tmdb.org/t/p/',
-        cover_size: 'w300',
+        cover_size: 'w342',
         hidden_info: {
             clicked_flag: false,
             info_index: 0,
@@ -30,6 +30,7 @@ var app = new Vue({
         current_actors: [],
         loading_actors: false,
         movies_genres: [],
+        movies_genres_ids: [],
         movies_genres_name: [],
 
     },
@@ -65,10 +66,17 @@ var app = new Vue({
 
                     //metto la risposta dell'API in un array
                     this.movies_genres = risposta.data.genres;
-                    console.log(this.movies_genres);
+                    console.log('Movie genres: ',this.movies_genres);
 
                 });
 
+        },
+        getMoviesGenresIds(){
+
+            for (var i = 0; i < this.movies.length; i++) {
+                this.movies_genres_ids.push(this.movies[i].genre_ids);
+            }
+            console.log(this.movies_genres_ids);
         },
         titleRequest(){
 
@@ -118,6 +126,9 @@ var app = new Vue({
                             this.no_results_movies = true;
                         }else{
                             this.no_results_movies = false;
+
+                            //prelevo i generi dei titoli cercati
+                            this.getMoviesGenresIds();
                         }
 
                         // console.log(this.no_results_movies);
@@ -151,7 +162,7 @@ var app = new Vue({
                                 this.no_results_tvshows = false;
                             }
 
-                            console.log(this.tvshows);
+                            // console.log(this.tvshows);
                         });
             }else{
                 // this.first_page_load = true;
@@ -252,6 +263,7 @@ var app = new Vue({
     },
     mounted() {
         this.moviesGenresRequest();
+
 
     }
 });
